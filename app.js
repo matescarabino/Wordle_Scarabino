@@ -1,5 +1,4 @@
-const matriz = document.querySelector('.card__matriz');
-const teclado = document.querySelector('.card__teclado');
+
 
 const celdas = [ 
     ['', '', '', '', ''],
@@ -11,7 +10,9 @@ const celdas = [
 
 
 
-
+function clickTecla(tecla){
+    console.log(tecla);
+}
 
 
 
