@@ -1,4 +1,7 @@
 
+/*------------------------------Declaro variables y constantes-----------------------------------*/
+const palabra = ['A','M','I','G','O'];
+
 const principal = [ 
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -7,10 +10,20 @@ const principal = [
     ['', '', '', '', ''],
     ['', '', '', '', '']];
 
+const colores = [ 
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]];
 
 let fila = 0;
 let columna = 0;
 
+
+
+/*------------------------ funciones del teclado ------------------------------------------*/
 
 function clickTecla(tecla){
 
@@ -42,102 +55,76 @@ function del(){
 }
 function enter(){
 
-    if(columna == 5){
+    if(columna == 5 && fila != 5){
         chequeo();
         fila++;
         columna = 0;
+    }else if (columna == 5 && fila == 5){
+        chequeo();
     }
 
 }
 
-/*------------------------------------------------------------------------------*/
+/*----------------------------funciones generales--------------------------------------*/
 
 function chequeo(){
     console.log(principal);
     console.log('validar si palabra existe');
 
+    validarCoincidencia();
+    pintarTablero();
+}
 
+function validarCoincidencia(){
+
+    for(let index = 0; index < 5; index++){
+        console.log(principal[fila][index])
+
+        if(principal[fila][index] == palabra[index]){
+            colores[fila][index] = 1
+        }else if(
+            principal[fila][index] == palabra[0] ||
+            principal[fila][index] == palabra[1] ||
+            principal[fila][index] == palabra[2] ||
+            principal[fila][index] == palabra[3] ||
+            principal[fila][index] == palabra[4] 
+            ){
+                colores[fila][index] = 2
+        }
+    }
 }
 
 
+function pintarTablero(){
+    for (var index = 0; index < colores.length; index++) {
+        
+        for (var celda = 0; celda < colores[index].length; celda++) {
+            
+            let valor = document.getElementById(`${index}${celda}`)
 
+            switch (colores[index][celda]) {
+
+                case 1:
+                valor.style.backgroundColor ='#33cc33'
+                valor.style.color ='#000'
+                    break;
+
+                case 2:
+                valor.style.backgroundColor ='#ffff4d'
+                valor.style.color ='#000'
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+    }
+}
 /*------------------------------------------------------------------------------*/
 
-// const colores = [ [0, 0, 0, 0, 0]
-//                 , [0, 0, 0, 0, 0]
-//                 , [0, 0, 0, 0, 0]
-//                 , [0, 0, 0, 0, 0]
-//                 , [0, 0, 0, 0, 0]
-//                 , [0, 0, 0, 0, 0]];
-
-// function pintarTablero(){
-//     for (var index = 0; index < principal.length; index++) {
-        
-//         for (var celda = 0; celda < principal[index].length; celda++) {
-
-//             let valor = document.getElementById(`${index}${celda}`)
-
-//             switch (colores[index][celda]) {
-//                 case 0:
-
-//                 valor.style.backgroundColor ='white'
-
-//                     break;
-//                 case 1:
-
-//                 valor.style.backgroundColor ='green'
-
-//                     break;
-//                 case 2:
-
-//                 valor.style.backgroundColor ='yellow'
-
-//                     break;
-
-//                 default:
-//                     break;
-//             }
-
-//         }
-//     }
-// }
-// pintarTablero()
 
 
-// const letras = [  ['', '', '', '', '']
-//                 , ['', '', '', '', '']
-//                 , ['', '', '', '', '']
-//                 , ['', '', '', '', '']
-//                 , ['', '', '', '', '']
-//                 , ['', '', '', '', '']];
-
-// function inicio(){
-//     for (var index = 0; index < letras.length; index++) {
-        
-//         for (var celda = 0; celda < letras[index].length; celda++) {
-    
-//             let valor = document.getElementById(`${index}${celda}`).value;
-
-//             letras[index][celda] = valor;
-
-//             console.log(letras[index][celda]);
-
-//             if(letras[index][celda] == principal[index][celda]){
-//                 colores[index][celda] = 1;
-//             }else if((letras[index][celda] == principal[0][0]) || 
-//                         (letras[index][celda] == principal[0][1]) ||
-//                         (letras[index][celda] == principal[0][2]) ||
-//                         (letras[index][celda] == principal[0][3]) ||
-//                         (letras[index][celda] == principal[0][4])){
-//                 colores[index][celda] = 2;
-//                 }else{
-//                     colores[index][celda] = 0;
-
-//                 }
-//             pintarTablero();
-//         }
-//     }
-// }
 
 
 
