@@ -110,7 +110,7 @@ function pintarTablero(){
                     break;
 
                 case 2:
-                valor.style.backgroundColor ='#ffff4d'
+                valor.style.backgroundColor ='#ffff00'
                 valor.style.color ='#000'
                     break;
 

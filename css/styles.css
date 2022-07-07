@@ -11,36 +11,31 @@ body{
     flex-direction: column;
     align-items: center;
 }
-/*--------------titulo-------------------*/
+/*--------------header-------------------*/
 
-.card__title{
+header{
     text-align: center;
-    width: 400px;
-    border-bottom: 1px solid #3a3a3c;
-    border: 1px solid red;
-
+    border-bottom: 2px solid #3a3a3c;
 }
 
 h1{
     margin-top: 30px;
+    margin-bottom: 30px;
     font-size: 40px;
 }
 /*--------------mensaje-------------------*/
 
 .card__mensaje{
-    width: 400px;
+    width: 510px;
 }
 /*--------------Matriz-------------------*/
 
 .card__matriz{
-    width: 400px;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 30px;
-    border: 1px solid red;
+    width: 330px;
+    margin: 30px;
 }
 .celda{
-    font-size: 25px;
+    font-size: 20px;
 }
 .card__matriz div{
     display: flex;
@@ -65,32 +60,88 @@ h1{
     margin-top: 30px;
     display:flex;
     flex-wrap: wrap;
-    border: 1px solid red;
 }
 
 .card__teclado button{
-    width: 35px;
-    height: 45px;
+    width: 36px;
+    height: 48px;
     font-size: 14px;
     border-radius: 4px;
     border:none;
-    background-color: #818384;
+    background-color: #3a3a3c;
     color: #fff;
     margin:2px;
 }
 .card__teclado button:nth-child(11){
-    margin-left: 20px;
+    margin-left: 22px;
 }
 
-.card__teclado button:nth-child(20), button:nth-child(28){
-    width: 55px;
+.card__teclado button:nth-child(20){
+    width: 56px;
     font-size: 12px;
     background-color: #33cc33;
     color:#000;
 }
+.card__teclado button:nth-child(28){
+    width: 56px;
+    font-size: 12px;
+    background-color: #ff3333;
+    color:#000;
+}
 
+.card__teclado button:hover{
+    border: 2px solid #121213;
+}
+.card__teclado button:active{
+    background-color: #fff;
+    color:#000;
+}
+
+.card__teclado button:nth-child(20):active {
+    background-color: #70db70;
+    border: 1px solid #70db70;
+}
+
+.card__teclado button:nth-child(28):active {
+    background-color: #ff6666;
+    border: 1px solid #ff6666;
+}
+
+/*--------------footer-------------------*/
+footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 30px;
+    background: #121213;
+    border-top:2px solid #3a3a3c ;
+
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+}
 /*================== tablet / PC ==================*/
-@media (min-width: 412px) {
+@media (min-width: 520px) {
+    .card__teclado{
+        width: 510px;
+        margin-top: 30px;
+    }
 
+    .card__teclado button{
+        width: 43px;
+        height: 58px;
+        margin:4px;
+    }
+    .card__teclado button:nth-child(11){
+        margin-left: 30px;
+    }
+
+    .card__teclado button:nth-child(20) {
+        width: 68px;
+    }
+    .card__teclado button:nth-child(28){
+        width: 68px;
+    }
 
 }
