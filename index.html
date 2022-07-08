@@ -13,7 +13,6 @@
             <h1>Wordle</h1>
         </header>
         <div class="card">
-            <div class="card__mensaje"></div>
             <div class="card__matriz">
                 <div id="fila_0">
                     <div id="00" class="celda"></div>
@@ -58,8 +57,12 @@
                     <div id="54" class="celda"></div>
                 </div>
             </div>
+            <div id="mensaje" class="card__mensaje"></div>
+            <div id="boton" class="card__button">
+                <button onclick="reset(); return false;">Volver a Jugar</button>
+            </div>
 
-            <div class="card__teclado">
+            <div id="teclado" class="card__teclado">
                 <button id="Q" onclick="clickTecla('Q');">Q</button>
                 <button id="W" onclick="clickTecla('W');">W</button>
                 <button id="E" onclick="clickTecla('E');">E</button>
@@ -79,7 +82,7 @@
                 <button id="J" onclick="clickTecla('J');">J</button>
                 <button id="K" onclick="clickTecla('K');">K</button>
                 <button id="L" onclick="clickTecla('L');">L</button>
-                <button id="ENTER" onclick="enter();">ENTER</button>
+                <button id="<<" onclick="del();">&lt;&lt;</button>
                 <button id="Z" onclick="clickTecla('Z');">Z</button>
                 <button id="X" onclick="clickTecla('X');">X</button>
                 <button id="C" onclick="clickTecla('C');">C</button>
@@ -87,13 +90,13 @@
                 <button id="B" onclick="clickTecla('B');">B</button>
                 <button id="N" onclick="clickTecla('N');">N</button>
                 <button id="M" onclick="clickTecla('M');">M</button>
-                <button id="<<" onclick="del();">&lt;&lt;</button>
+                <button id="ENTER" onclick="enter();">ENTER</button>
             </div>
         </div>
         <footer>            
             <a href="https://matescarabino.github.io/CV/" target="_blank">Copyright © 2022 SCARABINO MATEO</a>
         </footer>
 
-        <script src="app.js"></script>
+        <script src="./js/app.js"></script>
     </body>
 </html>

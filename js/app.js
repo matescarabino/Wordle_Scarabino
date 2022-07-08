@@ -73,26 +73,40 @@ function chequeo(){
 
     validarCoincidencia();
     pintarTablero();
+
+    validarVictoria();
 }
 
-function validarCoincidencia(){
+function validarCoincidencia() {
 
-    for(let index = 0; index < 5; index++){
+    for (let index = 0; index < 5; index++) {
         console.log(principal[fila][index])
 
-        if(principal[fila][index] == palabra[index]){
-            colores[fila][index] = 1
-        }else if(
+        if (principal[fila][index] == palabra[index]) {
+            colores[fila][index] = 1;
+            let tecla = document.getElementById(principal[fila][index]);
+            tecla.style.backgroundColor = '#33cc33';
+            tecla.style.color = '#000';
+        } else if (
             principal[fila][index] == palabra[0] ||
             principal[fila][index] == palabra[1] ||
             principal[fila][index] == palabra[2] ||
             principal[fila][index] == palabra[3] ||
-            principal[fila][index] == palabra[4] 
-            ){
-                colores[fila][index] = 2
+            principal[fila][index] == palabra[4]
+        ) {
+            colores[fila][index] = 2;
+            let tecla = document.getElementById(principal[fila][index]);
+            tecla.style.backgroundColor = '#ffff00';
+            tecla.style.color = '#000';
+        } else {
+            colores[fila][index] = 3;
+            let tecla = document.getElementById(principal[fila][index]);
+            tecla.style.backgroundColor = '#121213';
+            tecla.style.border = '2px solid #3a3a3c'
         }
     }
 }
+
 
 
 function pintarTablero(){
@@ -114,12 +128,41 @@ function pintarTablero(){
                 valor.style.color ='#000'
                     break;
 
+                case 3:
+                    valor.style.backgroundColor = '#121213'
+                    valor.style.border = '1px solid #3a3a3c'
+                    break;
+
                 default:
                     break;
             }
 
         }
     }
+}
+
+function validarVictoria(){
+    if(   
+        colores[fila][0] == 1 &&
+        colores[fila][1] == 1 &&
+        colores[fila][2] == 1 &&
+        colores[fila][3] == 1 &&
+        colores[fila][4] == 1)
+        {
+            let mensaje = document.getElementById('mensaje');
+            mensaje.innerHTML = 'Victoria';
+
+            let teclado = document.getElementById('teclado');
+            teclado.style.display = 'none';
+
+            let boton = document.getElementById('boton');
+            boton.style.display = 'flex';
+    }
+}
+
+
+function reset(){
+    window.location.href = "../index.html";
 }
 /*------------------------------------------------------------------------------*/
 
