@@ -75,6 +75,7 @@ function chequeo(){
     pintarTablero();
 
     validarVictoria();
+
 }
 
 function validarCoincidencia() {
@@ -157,10 +158,21 @@ function validarVictoria(){
 
             let boton = document.getElementById('boton');
             boton.style.display = 'flex';
+    //valido derrota
+    }else if(fila == 5){
+        let mensaje = document.getElementById('mensaje');
+        mensaje.innerHTML = 'Derrota';
+        mensaje.style.color = 'red';
+
+        let teclado = document.getElementById('teclado');
+        teclado.style.display = 'none';
+
+        let boton = document.getElementById('boton');
+        boton.style.display = 'flex';
     }
 }
 
-
+//boton para volver a jugar
 function reset(){
     window.location.href = "../index.html";
 }
