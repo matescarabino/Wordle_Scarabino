@@ -176,6 +176,37 @@ function validarVictoria(){
 function reset(){
     window.location.href = "../index.html";
 }
+
+
+
+
+
+
+
+
+
+
+//Metodo GET 
+function obtenerPalabra() {
+
+    let url = 'https://wordle.danielfrg.com/words/5.json';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => mostrarData(data))
+        .catch(error => mostrarError(error))
+
+    const mostrarData = (data) => {
+        console.log(data)
+    }
+
+    const mostrarError = (error)  => {
+        console.log(error)
+    }
+}
+obtenerPalabra();
+
+
+
 /*------------------------------------------------------------------------------*/
 
 
