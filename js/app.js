@@ -31,7 +31,7 @@ function clickTecla(tecla){
         principal[fila][columna] = tecla;
         valor = document.getElementById(`${fila}${columna}`);
         valor.innerHTML = tecla;
-    
+
         columna++;
     }
 
@@ -43,7 +43,6 @@ function del(){
         principal[fila][columna] = '';
         valor = document.getElementById(`${fila}${columna}`);
         valor.innerHTML = ''
-        return
     }else if(columna > 0){
         columna--;
         principal[fila][columna] = '';
@@ -72,6 +71,7 @@ function chequeo(){
     console.log('validar si palabra existe');
 
     validarCoincidencia();
+
     pintarTablero();
 
     validarVictoria();
@@ -89,11 +89,11 @@ function validarCoincidencia() {
             tecla.style.backgroundColor = '#33cc33';
             tecla.style.color = '#000';
         } else if (
-            principal[fila][index] == palabra[0] ||
-            principal[fila][index] == palabra[1] ||
-            principal[fila][index] == palabra[2] ||
-            principal[fila][index] == palabra[3] ||
-            principal[fila][index] == palabra[4]
+            (principal[fila][index] == palabra[0] ) ||
+            (principal[fila][index] == palabra[1] ) ||
+            (principal[fila][index] == palabra[2] ) ||
+            (principal[fila][index] == palabra[3] ) ||
+            (principal[fila][index] == palabra[4] )
         ) {
             colores[fila][index] = 2;
             let tecla = document.getElementById(principal[fila][index]);
@@ -161,9 +161,12 @@ function validarVictoria(){
     //valido derrota
     }else if(fila == 5){
         let mensaje = document.getElementById('mensaje');
-        mensaje.innerHTML = 'Derrota';
+        //mensaje temporal... despues hay q hacer un modal
+        mensaje.innerHTML = 'Derrota, la palabra era: '+ palabra[0]+palabra[1]+palabra[2]+palabra[3]+palabra[4];
         mensaje.style.color = 'red';
+        mensaje.style.fontSize = '30px';
 
+        
         let teclado = document.getElementById('teclado');
         teclado.style.display = 'none';
 
@@ -186,24 +189,24 @@ function reset(){
 
 
 
-//Metodo GET 
-function obtenerPalabra() {
+// Metodo GET 
+// function obtenerPalabra() {
 
-    let url = 'https://wordle.danielfrg.com/words/5.json';
-    fetch(url)
-        .then(response => response.json())
-        .then(data => mostrarData(data))
-        .catch(error => mostrarError(error))
+//     let url = 'https://wordle.danielfrg.com/words/5.json';
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(data => mostrarData(data))
+//         .catch(error => mostrarError(error))
 
-    const mostrarData = (data) => {
-        console.log(data)
-    }
+//     const mostrarData = (data) => {
+//         console.log(data)
+//     }
 
-    const mostrarError = (error)  => {
-        console.log(error)
-    }
-}
-obtenerPalabra();
+//     const mostrarError = (error)  => {
+//         console.log(error)
+//     }
+// }
+// obtenerPalabra();
 
 
 
