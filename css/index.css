@@ -1,0 +1,73 @@
+
+.card__title {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    font-size: 20px;
+    margin: 30px 10% 10px 10%;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+.card__campo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.card__campo__input {
+    display: flex;
+    height: 35px;
+    width: 400px;
+    font-size: large;
+}
+
+/*--------------boton-------------------*/
+
+.card__button {
+    margin-top: 10px;
+}
+
+.card__button button {
+    color: #000;
+    background-color: #33cc33;
+    border: 1px solid #000;
+
+}
+
+.card__button button:hover {
+    color: #fff;
+    background-color: #009933;
+    border: 1px solid #fff;
+}
+.card__button button:active {
+    color: #000;
+    background-color: #009933;
+    border: 3px solid #121213;
+}
+
+/*--------------------validaciones---------------------------*/
+.invalid {
+    border-color: red;
+}
+
+#errorMail ,#errorContrasenia{
+    color: red
+}
+
+.card__mensaje_error{
+    margin-bottom: 150px;
+    color: red;
+    border: 1px solid white;
+}
+
+/*================== tablet / PC ==================*/
+@media (min-width: 520px) {
+
+    .card__campo__input {
+        width: 500px;
+    }
+
+}

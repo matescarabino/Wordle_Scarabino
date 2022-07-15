@@ -21,7 +21,7 @@ const colores = [
 let fila = 0;
 let columna = 0;
 
-
+timer()
 
 /*------------------------ funciones del teclado ------------------------------------------*/
 
@@ -158,6 +158,8 @@ function validarVictoria(){
 
             let boton = document.getElementById('boton');
             boton.style.display = 'flex';
+
+            stopTimer();
     //valido derrota
     }else if(fila == 5){
         let mensaje = document.getElementById('mensaje');
@@ -172,17 +174,80 @@ function validarVictoria(){
 
         let boton = document.getElementById('boton');
         boton.style.display = 'flex';
+
+        stopTimer();
     }
 }
 
 //boton para volver a jugar
 function reset(){
-    window.location.href = "../index.html";
+    window.location.href = "./wordle.html";
 }
 
 
 
+ function timer(){
 
+    let hours = 00;
+    let minutes = 00;
+    let seconds = 00;
+    let appendHours = document.getElementById("hours");
+    let appendMinutes = document.getElementById("minutes");
+    let appendSeconds = document.getElementById("seconds");
+    let buttonStart = document.getElementById('button-start');
+    let buttonStop = document.getElementById('button-stop');
+    let buttonReset = document.getElementById('button-reset');
+    let Interval;
+
+    function start() {
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 1000);
+    }
+
+    start()
+
+    function stopTimer() {
+        clearInterval(Interval);
+    }
+
+    // buttonReset.onclick = function() {
+    //     clearInterval(Interval);
+    //     hours = "00";
+    //     minutes = "00";
+    //     seconds = "00";
+    //     appendHours.innerHTML = hours;
+    //     appendMinutes.innerHTML = minutes;
+    //     appendSeconds.innerHTML = seconds;
+    // }
+
+
+    function startTimer() {
+        seconds++;
+
+        if (seconds <= 9 && seconds!=="00") {appendSeconds.innerHTML = "0" + seconds;}
+        if (minutes <= 9 && minutes!=="00") {appendMinutes.innerHTML = "0" + minutes;}
+        if (hours <= 9 && hours!=="00") {appendHours.innerHTML = "0" + hours;}
+        if (seconds > 9 ) {appendSeconds.innerHTML = seconds;}
+        if (minutes > 9) {appendMinutes.innerHTML = minutes;}
+        if (hours > 9) {appendHours.innerHTML = hours;}
+
+        if (seconds >= 30) {
+            minutes++;
+            appendMinutes.innerHTML = "0" + minutes;
+            seconds = 0;
+        }
+
+        if (minutes >= 30) {
+            hours++;
+            appendHours.innerHTML = "0" + hours;
+            minutes = 0;
+            seconds = 0;
+        }
+
+    }
+
+
+}
 
 
 
