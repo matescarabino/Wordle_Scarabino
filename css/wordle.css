@@ -91,12 +91,43 @@
     margin-top: 30px;
 }
 
+.card__button_save button {
+    width: 250px;
+    padding: 1.3em 3em;
+    font-size: 14px;
+    margin: 15px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3a3a3c;
+    border: 3px solid #3a3a3c;
+    cursor: pointer;
+    outline: none;
+}
+
+.card__button_save {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card__button_save button:hover {
+    color: #000;
+    background-color: #3a3a3c;
+    border: 3px solid #121213;
+}
+.card__button_save button:active {
+    background-color: #fff;
+    border: 3px solid #121213;
+}
 /*--------------timer-------------------*/
 
 #seconds, #minutes, #hours {
     font-size: 2em;
 }
-
 
 .cronometer-row{
     margin-top: 30px;

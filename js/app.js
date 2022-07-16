@@ -1,6 +1,6 @@
 
 /*------------------------------Declaro variables y constantes-----------------------------------*/
-const palabra = ['A','M','I','G','O'];
+const palabra = ['S','U','E','L','O'];
 
 const principal = [ 
     ['', '', '', '', ''],
@@ -21,7 +21,7 @@ const colores = [
 let fila = 0;
 let columna = 0;
 
-timer()
+const mail = localStorage.getItem('mail');
 
 /*------------------------ funciones del teclado ------------------------------------------*/
 
@@ -172,8 +172,11 @@ function validarVictoria(){
         let teclado = document.getElementById('teclado');
         teclado.style.display = 'none';
 
-        let boton = document.getElementById('boton');
-        boton.style.display = 'flex';
+        let boton1 = document.getElementById('boton1');
+        boton1.style.display = 'flex';
+
+        let boton2 = document.getElementById('boton2');
+        boton2.style.display = 'none';
 
         stopTimer();
     }
@@ -185,8 +188,7 @@ function reset(){
 }
 
 
-
- function timer(){
+/*------------------------ timer ------------------------------------------*/
 
     let hours = 00;
     let minutes = 00;
@@ -206,21 +208,6 @@ function reset(){
 
     start()
 
-    function stopTimer() {
-        clearInterval(Interval);
-    }
-
-    // buttonReset.onclick = function() {
-    //     clearInterval(Interval);
-    //     hours = "00";
-    //     minutes = "00";
-    //     seconds = "00";
-    //     appendHours.innerHTML = hours;
-    //     appendMinutes.innerHTML = minutes;
-    //     appendSeconds.innerHTML = seconds;
-    // }
-
-
     function startTimer() {
         seconds++;
 
@@ -231,30 +218,69 @@ function reset(){
         if (minutes > 9) {appendMinutes.innerHTML = minutes;}
         if (hours > 9) {appendHours.innerHTML = hours;}
 
-        if (seconds >= 30) {
+        if (seconds >= 59) {
+            appendMinutes.innerHTML = minutes;
+            seconds = -1;
             minutes++;
-            appendMinutes.innerHTML = "0" + minutes;
-            seconds = 0;
         }
 
-        if (minutes >= 30) {
-            hours++;
-            appendHours.innerHTML = "0" + hours;
+
+        if (minutes >= 60) {
+            appendHours.innerHTML = '0' + hours;
             minutes = 0;
-            seconds = 0;
+            seconds = -1;
+            hours++;
+
         }
 
     }
 
+    function stopTimer() {
+        clearInterval(Interval);
+    }
+    
+/*------------------------ guardarPartida ------------------------------------------*/
+// Agregar funcionalidad de guardar y cargar partida en el juego usando LocalStorage. El jugador
+// puede guardar el progreso de una a más partidas, haciendo click en un botón que diga “guardar
+// partida”, guardando la palabra ganadora elegida y el progreso realizado por el usuario hasta el
+// momento de guardar la partida en LocalStorage. Las partidas guardadas se deben mostrar en una
+// lista y se deben poder cargar para continuar jugando
+
+function saveProgress(){
+    
+    //Declaro un array "save" y le guardo los datos necesarios para poder continuar jugando en otro momento
+    let save = {};
+
+    save.mail = mail;           
+    save.palabra = palabra;           
+    save.principal = principal;
+    save.colores = colores;
+    save.fila = fila;
+    save.columna = columna;
+    save.hours = hours;
+    save.minutes = minutes;
+    save.seconds = seconds;
+
+    //Traigo del localStorage el array "saves", si no esta le asigno "[]"
+    let savesArray = JSON.parse(localStorage.getItem('saves')) || [];
+    savesArray.push(save);
+    //Convierto mi array de saves a json
+    let savesArrayJSON = JSON.stringify(savesArray);
+    //Guardo mi array de saves en formato JSON en el local storage
+    localStorage.setItem("saves", savesArrayJSON)
+
+
+    console.log(savesArray);
+
 
 }
 
+/*------------------------ get/post apis ------------------------------------------*/
 
 
 
 
-
-// Metodo GET 
+// //Metodo GET 
 // function obtenerPalabra() {
 
 //     let url = 'https://wordle.danielfrg.com/words/5.json';
@@ -273,6 +299,26 @@ function reset(){
 // }
 // obtenerPalabra();
 
+
+
+// let url = 'https://wordle.danielfrg.com/words/5.json';
+// fetch(URL, 
+//     {
+//         method: "GET", 
+//         body: JSON.stringify(data),
+//         mode: 'cors',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         }
+//     }
+// ).then(response => response.json())
+// .then(data => {
+//     ....
+// })
+// .catch((err) => {
+//     ....
+//     })
+// });
 
 
 /*------------------------------------------------------------------------------*/

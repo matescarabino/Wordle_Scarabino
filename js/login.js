@@ -17,6 +17,8 @@ window.onload = function () {
             return false;
         }
 
+        localStorage.setItem('mail', mail.value);
+
         redirigir()
 
         event.preventDefault();
