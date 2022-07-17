@@ -2,7 +2,7 @@
 
 .card__matriz{
     width: 330px;
-    margin: 30px;
+    margin: 20px;
 }
 .celda{
     font-size: 20px;
@@ -23,10 +23,13 @@
     margin: 2px;
 }
 
+/* #juego{
+    display: none;
+} */
 /*--------------Teclado-------------------*/
 .card__teclado{
     width: 400px;
-    margin-top: 30px;
+    margin-top: 20px;
     display:flex;
     flex-wrap: wrap;
 }
@@ -88,11 +91,11 @@
     width: 100%;
     display: none;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .card__button_save button {
-    width: 250px;
+    width: 270px;
     padding: 1.3em 3em;
     font-size: 14px;
     margin: 15px;
@@ -111,7 +114,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .card__button_save button:hover {
@@ -123,6 +126,8 @@
     background-color: #fff;
     border: 3px solid #121213;
 }
+
+
 /*--------------timer-------------------*/
 
 #seconds, #minutes, #hours {
@@ -130,8 +135,8 @@
 }
 
 .cronometer-row{
-    margin-top: 30px;
-    font-size:18px;
+    margin-top: 20px;
+    font-size: 15px;
 }
 
 /*================== tablet / PC ==================*/
@@ -147,7 +152,7 @@
 
     .card__teclado{
         width: 510px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     .card__teclado button{

@@ -1,27 +1,97 @@
 
 /*------------------------------Declaro variables y constantes-----------------------------------*/
-const palabra = ['S','U','E','L','O'];
+/*------------------------ obetener partida ------------------------------------------*/
 
-const principal = [ 
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', '']];
+// function getSave(){
 
-const colores = [ 
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]];
+    let saveActual = new URLSearchParams(window.location.search);
 
-let fila = 0;
-let columna = 0;
+    let i = saveActual.get("save");
 
-const mail = localStorage.getItem('mail');
+    if(i){
+        //Traigo del localStorage el array "saves"
+        let savesArray = JSON.parse(localStorage.getItem('saves'));  
+        
+        window.palabra = savesArray[i].palabra
+        window.principal = savesArray[i].principal
+        window.colores = savesArray[i].colores
+        window.fila = savesArray[i].fila
+        window.columna = savesArray[i].columna
+        window.hours = savesArray[i].hours
+        window.minutes = savesArray[i].minutes
+        window.seconds = savesArray[i].seconds
+        
+        window.appendHours = document.getElementById("hours");
+        window.appendMinutes = document.getElementById("minutes");
+        window.appendSeconds = document.getElementById("seconds");
+        window.Interval;
+
+        cargarJuego();
+    }else{
+        window.palabra = ['S','U','E','L','O'];
+
+        window.principal = [ 
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', '']];
+        
+        window.colores = [ 
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]];
+    
+        window.fila = 0;
+        window.columna = 0;
+    
+        window.appendHours = document.getElementById("hours");
+        window.appendMinutes = document.getElementById("minutes");
+        window.appendSeconds = document.getElementById("seconds");
+        window.Interval;
+
+        window.mail = localStorage.getItem('mail');
+        
+        cargarJuego();
+
+    }
+
+  
+
+    // start();
+
+// }
+
+
+/*------------------------ cargar matriz ------------------------------------------*/
+
+function cargarJuego(){
+
+
+    for (var index = 0; index < window.principal.length; index++) {
+        
+        for (var celda = 0; celda < window.principal[index].length; celda++) {
+            
+            let valor = document.getElementById(`${index}${celda}`)
+
+            valor.innerHTML = window.principal[index][celda];
+        }
+    }
+
+
+    pintarTablero();
+
+    pintarTeclado();
+
+
+
+
+    start();
+}
 
 /*------------------------ funciones del teclado ------------------------------------------*/
 
@@ -67,8 +137,8 @@ function enter(){
 /*----------------------------funciones generales--------------------------------------*/
 
 function chequeo(){
-    console.log(principal);
-    console.log('validar si palabra existe');
+    // console.log(principal);
+    // console.log('validar si palabra existe');
 
     validarCoincidencia();
 
@@ -81,43 +151,40 @@ function chequeo(){
 function validarCoincidencia() {
 
     for (let index = 0; index < 5; index++) {
-        console.log(principal[fila][index])
+        console.log(window.principal[fila][index])
 
-        if (principal[fila][index] == palabra[index]) {
-            colores[fila][index] = 1;
-            let tecla = document.getElementById(principal[fila][index]);
-            tecla.style.backgroundColor = '#33cc33';
-            tecla.style.color = '#000';
-        } else if (
-            (principal[fila][index] == palabra[0] ) ||
-            (principal[fila][index] == palabra[1] ) ||
-            (principal[fila][index] == palabra[2] ) ||
-            (principal[fila][index] == palabra[3] ) ||
-            (principal[fila][index] == palabra[4] )
+        if (window.principal[fila][index] == window.palabra[index]) {
+            window.colores[fila][index] = 1;
+;
+        } 
+        else if (
+            (window.principal[fila][index] == window.palabra[0] ) ||
+            (window.principal[fila][index] == window.palabra[1] ) ||
+            (window.principal[fila][index] == window.palabra[2] ) ||
+            (window.principal[fila][index] == window.palabra[3] ) ||
+            (window.principal[fila][index] == window.palabra[4] )
         ) {
-            colores[fila][index] = 2;
-            let tecla = document.getElementById(principal[fila][index]);
-            tecla.style.backgroundColor = '#ffff00';
-            tecla.style.color = '#000';
-        } else {
-            colores[fila][index] = 3;
-            let tecla = document.getElementById(principal[fila][index]);
-            tecla.style.backgroundColor = '#121213';
-            tecla.style.border = '2px solid #3a3a3c'
+            window.colores[fila][index] = 2;
+
+        } 
+        else {
+            window.colores[fila][index] = 3;
+
         }
     }
+    pintarTeclado();
 }
 
 
 
 function pintarTablero(){
-    for (var index = 0; index < colores.length; index++) {
+    for (var index = 0; index < window.colores.length; index++) {
         
-        for (var celda = 0; celda < colores[index].length; celda++) {
+        for (var celda = 0; celda < window.colores[index].length; celda++) {
             
             let valor = document.getElementById(`${index}${celda}`)
 
-            switch (colores[index][celda]) {
+            switch (window.colores[index][celda]) {
 
                 case 1:
                 valor.style.backgroundColor ='#33cc33'
@@ -142,6 +209,40 @@ function pintarTablero(){
     }
 }
 
+function pintarTeclado(){
+    for (var index = 0; index < window.colores.length; index++) {
+        
+        for (var celda = 0; celda < window.colores[index].length; celda++) {
+            
+            let tecla = document.getElementById(principal[index][celda]);
+
+            switch (window.colores[index][celda]) {
+
+                case 1:
+                    tecla.style.backgroundColor ='#33cc33'
+                    tecla.style.color ='#000'
+                    break;
+
+                case 2:
+                    tecla.style.backgroundColor ='#ffff00'
+                    tecla.style.color ='#000'
+                    break;
+
+                case 3:
+                    tecla.style.backgroundColor = '#121213'
+                    tecla.style.border = '1px solid #3a3a3c'
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+    }
+}
+
+
+
 function validarVictoria(){
     if(   
         colores[fila][0] == 1 &&
@@ -156,8 +257,11 @@ function validarVictoria(){
             let teclado = document.getElementById('teclado');
             teclado.style.display = 'none';
 
-            let boton = document.getElementById('boton');
-            boton.style.display = 'flex';
+            let boton1 = document.getElementById('boton1');
+            boton1.style.display = 'flex';
+    
+            let boton2 = document.getElementById('boton2');
+            boton2.style.display = 'none';
 
             stopTimer();
     //valido derrota
@@ -190,55 +294,55 @@ function reset(){
 
 /*------------------------ timer ------------------------------------------*/
 
-    let hours = 00;
-    let minutes = 00;
-    let seconds = 00;
-    let appendHours = document.getElementById("hours");
-    let appendMinutes = document.getElementById("minutes");
-    let appendSeconds = document.getElementById("seconds");
-    let buttonStart = document.getElementById('button-start');
-    let buttonStop = document.getElementById('button-stop');
-    let buttonReset = document.getElementById('button-reset');
-    let Interval;
+    // let hours = 00;
+    // let minutes = 00;
+    // let seconds = 00;
+    // let appendHours = document.getElementById("hours");
+    // let appendMinutes = document.getElementById("minutes");
+    // let appendSeconds = document.getElementById("seconds");
+    // let buttonStart = document.getElementById('button-start');
+    // let buttonStop = document.getElementById('button-stop');
+    // let buttonReset = document.getElementById('button-reset');
+    // let Interval;
 
-    function start() {
-        clearInterval(Interval);
-        Interval = setInterval(startTimer, 1000);
+function start() {
+    clearInterval(window.Interval);
+    window.Interval = setInterval(startTimer, 1000);
+}
+
+// start()
+
+function startTimer() {
+    seconds++;
+
+    if (seconds <= 9 && seconds !== "00") { appendSeconds.innerHTML = "0" + seconds; }
+    if (minutes <= 9 && minutes !== "00") { appendMinutes.innerHTML = "0" + minutes; }
+    if (hours <= 9 && hours !== "00") { appendHours.innerHTML = "0" + hours; }
+    if (seconds > 9) { appendSeconds.innerHTML = seconds; }
+    if (minutes > 9) { appendMinutes.innerHTML = minutes; }
+    if (hours > 9) { appendHours.innerHTML = hours; }
+
+    if (seconds >= 59) {
+        appendMinutes.innerHTML = minutes;
+        seconds = -1;
+        minutes++;
     }
 
-    start()
 
-    function startTimer() {
-        seconds++;
-
-        if (seconds <= 9 && seconds!=="00") {appendSeconds.innerHTML = "0" + seconds;}
-        if (minutes <= 9 && minutes!=="00") {appendMinutes.innerHTML = "0" + minutes;}
-        if (hours <= 9 && hours!=="00") {appendHours.innerHTML = "0" + hours;}
-        if (seconds > 9 ) {appendSeconds.innerHTML = seconds;}
-        if (minutes > 9) {appendMinutes.innerHTML = minutes;}
-        if (hours > 9) {appendHours.innerHTML = hours;}
-
-        if (seconds >= 59) {
-            appendMinutes.innerHTML = minutes;
-            seconds = -1;
-            minutes++;
-        }
-
-
-        if (minutes >= 60) {
-            appendHours.innerHTML = '0' + hours;
-            minutes = 0;
-            seconds = -1;
-            hours++;
-
-        }
+    if (minutes >= 60) {
+        appendHours.innerHTML = '0' + hours;
+        minutes = 0;
+        seconds = -1;
+        hours++;
 
     }
 
-    function stopTimer() {
-        clearInterval(Interval);
-    }
-    
+}
+
+function stopTimer() {
+    clearInterval(Interval);
+}
+
 /*------------------------ guardarPartida ------------------------------------------*/
 // Agregar funcionalidad de guardar y cargar partida en el juego usando LocalStorage. El jugador
 // puede guardar el progreso de una a más partidas, haciendo click en un botón que diga “guardar
@@ -251,15 +355,16 @@ function saveProgress(){
     //Declaro un array "save" y le guardo los datos necesarios para poder continuar jugando en otro momento
     let save = {};
 
-    save.mail = mail;           
-    save.palabra = palabra;           
-    save.principal = principal;
-    save.colores = colores;
-    save.fila = fila;
-    save.columna = columna;
-    save.hours = hours;
-    save.minutes = minutes;
-    save.seconds = seconds;
+    save.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
+    save.mail = window.mail;           
+    save.palabra = window.palabra;           
+    save.principal = window.principal;
+    save.colores = window.colores;
+    save.fila = window.fila;
+    save.columna = window.columna;
+    save.hours = window.hours;
+    save.minutes = window.minutes;
+    save.seconds = window.seconds;
 
     //Traigo del localStorage el array "saves", si no esta le asigno "[]"
     let savesArray = JSON.parse(localStorage.getItem('saves')) || [];
@@ -269,10 +374,8 @@ function saveProgress(){
     //Guardo mi array de saves en formato JSON en el local storage
     localStorage.setItem("saves", savesArrayJSON)
 
-
-    console.log(savesArray);
-
-
+    // console.log(savesArray)
+    window.location.href = "../index.html";
 }
 
 /*------------------------ get/post apis ------------------------------------------*/

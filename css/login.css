@@ -1,26 +1,9 @@
 
-.card__title {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    font-size: 20px;
-    margin: 30px 10% 10px 10%;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 5px;
-}
-
-.card__campo {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 90%;
-}
 
 .card__campo__input {
     display: flex;
     height: 35px;
-    width: 400px;
+    width: 350px;
     font-size: large;
 }
 
@@ -54,15 +37,50 @@
 }
 
 #errorMail ,#errorContrasenia{
+    text-align: center;
+    margin-top: 10px;
     color: red
 }
 
 .card__mensaje_error{
     margin-bottom: 150px;
+    margin-top: 30px;
     color: red;
     border: 1px solid white;
 }
 
+/*--------------saves-------------------*/
+
+.card_saves{
+    width: 400px;
+    margin-top: 20px;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.card_saves button{
+    width: 190px;
+    height: 48px;
+    text-align: start;
+    font-size: 16px;
+    border-radius: 4px;
+    border:none;
+    background-color: #3a3a3c;
+    color: #fff;
+    margin:2px;
+}
+
+.card_saves button:hover{
+    border: 1px solid #fff;
+}
+.card_saves button:active{
+    background-color: #fff;
+    color:#000;
+}
+
+#titulo_save{
+    display:none
+}
 /*================== tablet / PC ==================*/
 @media (min-width: 520px) {
 
