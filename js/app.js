@@ -1,5 +1,3 @@
-
-/*------------------------------Declaro variables y constantes-----------------------------------*/
 /*------------------------ obetener partida ------------------------------------------*/
 
 // function getSave(){
@@ -21,6 +19,8 @@
         window.minutes = savesArray[i].minutes
         window.seconds = savesArray[i].seconds
         
+        window.mail = localStorage.getItem('mail');
+
         window.appendHours = document.getElementById("hours");
         window.appendMinutes = document.getElementById("minutes");
         window.appendSeconds = document.getElementById("seconds");
@@ -49,6 +49,9 @@
         window.fila = 0;
         window.columna = 0;
     
+        window.hours = 00;
+        window.minutes = 00;
+        window.seconds = 00;
         window.appendHours = document.getElementById("hours");
         window.appendMinutes = document.getElementById("minutes");
         window.appendSeconds = document.getElementById("seconds");
@@ -60,14 +63,11 @@
 
     }
 
-  
-
-    // start();
 
 // }
 
 
-/*------------------------ cargar matriz ------------------------------------------*/
+/*------------------------ cargar juego ------------------------------------------*/
 
 function cargarJuego(){
 
@@ -86,9 +86,6 @@ function cargarJuego(){
     pintarTablero();
 
     pintarTeclado();
-
-
-
 
     start();
 }
@@ -134,7 +131,7 @@ function enter(){
 
 }
 
-/*----------------------------funciones generales--------------------------------------*/
+/*----------------------------funciones juego--------------------------------------*/
 
 function chequeo(){
     // console.log(principal);
@@ -294,23 +291,11 @@ function reset(){
 
 /*------------------------ timer ------------------------------------------*/
 
-    // let hours = 00;
-    // let minutes = 00;
-    // let seconds = 00;
-    // let appendHours = document.getElementById("hours");
-    // let appendMinutes = document.getElementById("minutes");
-    // let appendSeconds = document.getElementById("seconds");
-    // let buttonStart = document.getElementById('button-start');
-    // let buttonStop = document.getElementById('button-stop');
-    // let buttonReset = document.getElementById('button-reset');
-    // let Interval;
-
 function start() {
     clearInterval(window.Interval);
     window.Interval = setInterval(startTimer, 1000);
 }
 
-// start()
 
 function startTimer() {
     seconds++;
@@ -344,11 +329,6 @@ function stopTimer() {
 }
 
 /*------------------------ guardarPartida ------------------------------------------*/
-// Agregar funcionalidad de guardar y cargar partida en el juego usando LocalStorage. El jugador
-// puede guardar el progreso de una a más partidas, haciendo click en un botón que diga “guardar
-// partida”, guardando la palabra ganadora elegida y el progreso realizado por el usuario hasta el
-// momento de guardar la partida en LocalStorage. Las partidas guardadas se deben mostrar en una
-// lista y se deben poder cargar para continuar jugando
 
 function saveProgress(){
     
@@ -380,9 +360,6 @@ function saveProgress(){
 
 /*------------------------ get/post apis ------------------------------------------*/
 
-
-
-
 // //Metodo GET 
 // function obtenerPalabra() {
 
@@ -401,28 +378,6 @@ function saveProgress(){
 //     }
 // }
 // obtenerPalabra();
-
-
-
-// let url = 'https://wordle.danielfrg.com/words/5.json';
-// fetch(URL, 
-//     {
-//         method: "GET", 
-//         body: JSON.stringify(data),
-//         mode: 'cors',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     }
-// ).then(response => response.json())
-// .then(data => {
-//     ....
-// })
-// .catch((err) => {
-//     ....
-//     })
-// });
-
 
 /*------------------------------------------------------------------------------*/
 

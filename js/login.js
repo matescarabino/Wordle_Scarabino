@@ -92,51 +92,10 @@ function obtenerSaves(mail) {
 
 function clickSave(i) {
 
-    // //Traigo del localStorage el array "saves"
-    // let savesArray = JSON.parse(localStorage.getItem('saves'));
-    // console.log(savesArray[i]);
-
-    // //Declaro un array "saveActual" y le guardo los datos necesarios para poder continuar jugando en otro momento
-    // let saveActual = {};
-
-    // saveActual.fecha = savesArray[i].Date
-    // saveActual.mail = savesArray[i].mail;
-    // saveActual.palabra = savesArray[i].palabra;
-    // saveActual.principal = savesArray[i].principal;
-    // saveActual.colores = savesArray[i].colores;
-    // saveActual.fila = savesArray[i].fila;
-    // saveActual.columna = savesArray[i].columna;
-    // saveActual.hours = savesArray[i].hours;
-    // saveActual.minutes = savesArray[i].minutes;
-    // saveActual.seconds = savesArray[i].seconds;
-
-
-
     let saveActual = new URLSearchParams();
 
     saveActual.append("save", i);
-    // saveActualString.append("mail", savesArray[i].mail);
-    // saveActualString.append("palabra", JSON.stringify(savesArray[i].palabra));
-    // saveActualString.append("principal", JSON.stringify(savesArray[i].principal));
-    // saveActualString.append("colores", JSON.stringify(savesArray[i].colores));
-    // saveActualString.append("fila", savesArray[i].fila);
-    // saveActualString.append("columna", savesArray[i].columna);
-    // saveActualString.append("hours", savesArray[i].hours);
-    // saveActualString.append("minutes", savesArray[i].minutes);
-    // saveActualString.append("seconds", savesArray[i].seconds);
-
 
     location.href = "/html/wordle.html?" + saveActual.toString();
-
-
-
-
-
-    // //Convierto mi array de saves a json
-    // let savesArrayJSON = JSON.stringify(saveActual);
-    // //Guardo mi array de saves en formato JSON en el local storage
-    // localStorage.setItem("saveActual", savesArrayJSON);
-
-    // redirigir();
 
 }
