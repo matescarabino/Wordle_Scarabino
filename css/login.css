@@ -36,7 +36,9 @@
     border-color: red;
 }
 
-#errorMail ,#errorContrasenia{
+#errorNombre
+,#errorMail
+,#errorMensaje{
     text-align: center;
     margin-top: 10px;
     color: red
@@ -49,6 +51,19 @@
     border: 1px solid white;
 }
 
+.card__campo__label {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.card__campo_big textarea {
+    height: 80px;
+}
+
 /*--------------saves-------------------*/
 
 .card_saves{
@@ -59,9 +74,9 @@
 }
 
 .card_saves button{
-    width: 190px;
-    height: 48px;
-    text-align: start;
+    width: 196px;
+    height: 65px;
+    text-align: center;
     font-size: 16px;
     border-radius: 4px;
     border:none;
@@ -80,6 +95,13 @@
 
 #titulo_save{
     display:none
+}
+
+#nuevaPartida{
+    width: 400px;
+    height: 48px;
+    color:#000;
+    background-color: #009933;
 }
 /*================== tablet / PC ==================*/
 @media (min-width: 520px) {

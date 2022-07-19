@@ -19,7 +19,7 @@
         window.minutes = savesArray[i].minutes
         window.seconds = savesArray[i].seconds
         
-        window.mail = localStorage.getItem('mail');
+        window.nombre = localStorage.getItem('nombre');
 
         window.appendHours = document.getElementById("hours");
         window.appendMinutes = document.getElementById("minutes");
@@ -57,7 +57,7 @@
         window.appendSeconds = document.getElementById("seconds");
         window.Interval;
 
-        window.mail = localStorage.getItem('mail');
+        window.nombre = localStorage.getItem('nombre');
         
         cargarJuego();
 
@@ -98,11 +98,18 @@ function clickTecla(tecla){
         principal[fila][columna] = tecla;
         valor = document.getElementById(`${fila}${columna}`);
         valor.innerHTML = tecla;
-
         columna++;
-    }
 
-    console.log(fila, columna)
+        if (columna == 5){
+            let enter = document.getElementById('ENTER');
+            enter.style.backgroundColor = '#33cc33';
+        }
+        if (columna != 0){
+            let del = document.getElementById('<<');
+            del.style.backgroundColor = '#ff3333';
+        }
+    } 
+
 }
 
 function del(){
@@ -115,10 +122,18 @@ function del(){
         principal[fila][columna] = '';
         valor = document.getElementById(`${fila}${columna}`);
         valor.innerHTML = ''
-    }
-    console.log(fila, columna)
 
+        if (columna != 5){
+            let enter = document.getElementById('ENTER');
+            enter.style.backgroundColor = '#70db70';
+        }
+        if (columna == 0){
+            let del = document.getElementById('<<');
+            del.style.backgroundColor = '#ff6666';
+        }
+    }
 }
+
 function enter(){
 
     if(columna == 5 && fila != 5){
@@ -128,14 +143,19 @@ function enter(){
     }else if (columna == 5 && fila == 5){
         chequeo();
     }
+    if (columna != 5){
+        let enter = document.getElementById('ENTER');
+        enter.style.backgroundColor = '#70db70';
 
+        let del = document.getElementById('<<');
+        del.style.backgroundColor = '#ff6666';
+    }
 }
 
 /*----------------------------funciones juego--------------------------------------*/
 
 function chequeo(){
-    // console.log(principal);
-    // console.log('validar si palabra existe');
+    console.log('validar si palabra existe');
 
     validarCoincidencia();
 
@@ -148,11 +168,8 @@ function chequeo(){
 function validarCoincidencia() {
 
     for (let index = 0; index < 5; index++) {
-        console.log(window.principal[fila][index])
-
         if (window.principal[fila][index] == window.palabra[index]) {
             window.colores[fila][index] = 1;
-;
         } 
         else if (
             (window.principal[fila][index] == window.palabra[0] ) ||
@@ -162,11 +179,9 @@ function validarCoincidencia() {
             (window.principal[fila][index] == window.palabra[4] )
         ) {
             window.colores[fila][index] = 2;
-
         } 
         else {
             window.colores[fila][index] = 3;
-
         }
     }
     pintarTeclado();
@@ -313,15 +328,12 @@ function startTimer() {
         minutes++;
     }
 
-
     if (minutes >= 60) {
         appendHours.innerHTML = '0' + hours;
         minutes = 0;
         seconds = -1;
         hours++;
-
     }
-
 }
 
 function stopTimer() {
@@ -336,7 +348,7 @@ function saveProgress(){
     let save = {};
 
     save.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
-    save.mail = window.mail;           
+    save.nombre = window.nombre;           
     save.palabra = window.palabra;           
     save.principal = window.principal;
     save.colores = window.colores;

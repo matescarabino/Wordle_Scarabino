@@ -6,89 +6,87 @@ window.onload = function () {
     //Validación on Submit --------------------------------------------------------------------
     document.formulario.onsubmit = function (event) {
 
+        //Validación Nombre --------------------------------------------------------------------
+        let nombre = document.getElementById('nombreInput');
+        let name_format = /[A-Za-z0-9_]/;
 
-        //Validación Email --------------------------------------------------------------------
-        let mail = document.getElementById('emailInput');
-        let mail_format = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-
-        if (!(((mail.value).toLowerCase()).match(mail_format)) || (mail.value == "")) {
-            mail.classList.add('invalid');
-            errorMail.innerHTML = 'Ingrese un email válido.';
-            return false;
+        if ((nombre.value.length < 3) || (!nombre.value.match(name_format) || (nombre.value == ""))) {
+            nombre.classList.add('invalid');
+            errorNombre.innerHTML = 'Ingrese un nombre no menor a 3 caracteres alfanumericos.'
+            return false; //se utiliza para abortar la funcion
         }
 
-        localStorage.setItem('mail', mail.value);
 
-        obtenerSaves(mail.value);
+        localStorage.setItem('nombre', nombre.value);
 
-        // redirigir();
+        obtenerSaves(nombre.value);
 
         event.preventDefault();
     }
 }
 
-
+//Validación onfocus/onblur --------------------------------------------------------------------
 function validacionesOnFocus() {
-    // Validación Mail ------------------------------------------------------------------------
-    let mail = document.getElementById('emailInput');
-    let mail_format = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+     //Validación Nombre --------------------------------------------------------------------
+     let nombre = document.getElementById('nombreInput');
+     let name_format = /[A-Za-z0-9_]/;
+ 
+     nombre.onblur = function () {
+         if ((nombre.value.length < 3) || (!nombre.value.match(name_format))
+         ) {
+             nombre.classList.add('invalid');
+             errorNombre.innerHTML = 'Ingrese un nombre no menor a 3 caracteres alfanumericos.'
+ 
+         }
+     };
+ 
+     nombre.onfocus = function () {
+         if (nombre.classList.contains('invalid')) {
+             nombre.classList.remove('invalid');
+             errorNombre.innerHTML = "&nbsp;";
+         }
+     };
 
-    mail.onblur = function () {
-        if (!((mail.value).toLowerCase()).match(mail_format)) {
-            mail.classList.add('invalid');
-            errorMail.innerHTML = 'Ingrese un email válido.'
-        }
-    };
-    mail.onfocus = function () {
-        if (mail.classList.contains('invalid')) {
-            mail.classList.remove('invalid');
-            errorMail.innerHTML = "&nbsp;";
-        }
-    };
 }
-
 
 function redirigir(){
     window.location.href = "./html/wordle.html";
 }
 
-
 /*------------------------ Mostrar partidas ------------------------------------------*/
 
-function obtenerSaves(mail) {
+function obtenerSaves(nombre) {
 
-
+    // let card_save = document.getElementById('data');
+    // card_save.style.display = "flex"
 
     //Traigo del localStorage el array "saves", si no esta le asigno "[]"
     let savesArray = JSON.parse(localStorage.getItem('saves')) || [];
-    console.log(savesArray)
 
-    //Muestro la lista de saves para el mail ingresado
-    let body = "";
+    //Muestro la lista de saves para el nombre ingresado
+    let body = `<button onclick="redirigir();" id="nuevaPartida">Nueva Partida</button>`;
+    let c = 0
     for (var i = 0; i < savesArray.length; i++) {
-        if(savesArray[i].mail == mail){
-            body += `<button onclick="clickSave('${i}');">${savesArray[i].fecha}</button>`;
+        if(savesArray[i].nombre == nombre){
+            c++;
+            body += `<button onclick="clickSave('${i}');">Save: ${c}<br><br>${savesArray[i].fecha}</button>`;
             var encontro = true;
         }
     }
 
     if(encontro){
         document.getElementById('data').innerHTML = body;
+        //Muesto titulo
+        let titulo_save = document.getElementById('titulo_save');
+        titulo_save.style.display = 'flex';
+
+        //Escondo card
+        let card = document.getElementById('formulario');
+        card.style.display = 'none';
     }else{
         redirigir()
     }
-
-    //Muesto titulo
-    let titulo_save = document.getElementById('titulo_save');
-    titulo_save.style.display = 'flex';
-
-    //Escondo card
-    let card = document.getElementById('formulario');
-    card.style.display = 'none';
-
-
 }
-
 
 function clickSave(i) {
 
