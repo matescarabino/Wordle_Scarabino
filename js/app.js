@@ -303,7 +303,9 @@ function reset(){
     window.location.href = "./wordle.html";
 }
 
-
+function mail(){
+    window.location.href = "../html/contacto.html";
+}
 /*------------------------ timer ------------------------------------------*/
 
 function start() {

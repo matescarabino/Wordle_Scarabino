@@ -52,7 +52,9 @@ function validacionesOnFocus() {
 function redirigir(){
     window.location.href = "./html/wordle.html";
 }
-
+function mail(){
+    window.location.href = "./html/contacto.html";
+}
 /*------------------------ Mostrar partidas ------------------------------------------*/
 
 function obtenerSaves(nombre) {
@@ -69,7 +71,7 @@ function obtenerSaves(nombre) {
     for (var i = 0; i < savesArray.length; i++) {
         if(savesArray[i].nombre == nombre){
             c++;
-            body += `<button onclick="clickSave('${i}');">Save: ${c}<br><br>${savesArray[i].fecha}</button>`;
+            body += `<button onclick="clickSave('${i}');">Partida: ${c}<br><br>${savesArray[i].fecha}</button>`;
             var encontro = true;
         }
     }
