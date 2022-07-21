@@ -1,5 +1,4 @@
 
-
 .card__campo__input {
     display: flex;
     height: 35px;
@@ -103,6 +102,11 @@
     color:#000;
     background-color: #009933;
 }
+
+
+/* section{
+    height: 550px;
+} */
 /*================== tablet / PC ==================*/
 @media (min-width: 520px) {
 
@@ -110,4 +114,18 @@
         width: 500px;
     }
 
+}
+/*================== dispositivos pequenios ==================*/
+
+@media (max-width: 400px) {
+    .card_saves{
+        width: 360px;
+        margin-top: 10px;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .card_saves button{
+        width: 176px;
+        height: 65px;
+    }
 }

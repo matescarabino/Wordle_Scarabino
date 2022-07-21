@@ -305,7 +305,7 @@ function reset(){
     window.location.href = "./wordle.html";
 }
 
-function mail(){
+function redirigirContacto(){
     window.location.href = "../html/contacto.html";
 }
 

@@ -96,6 +96,6 @@ function clickSave(i) {
 
     saveActual.append("save", i);
 
-    window.location.href = "/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 
 }
