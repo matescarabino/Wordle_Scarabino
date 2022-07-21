@@ -45,8 +45,8 @@ h1{
     font-size: 35px;
 }
 .img_holder{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display:flex;
     text-align: center;
     align-self: center;   
@@ -61,8 +61,8 @@ h1{
     border:2px solid #121213;
 }
 img{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     text-align: center;
     align-self: center;    
 }
@@ -121,6 +121,125 @@ footer a {
     text-decoration: none;
     color: #fff;
 }
+
+/*================== Modal ==================*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_content {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: center;
+    background-color: #121213;
+    border: 2px solid #3a3a3c;
+    margin: 15% auto;
+}
+
+.modal_message {
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #3a3a3c;
+    color: #fff;
+    font-size: 18px;
+}
+
+.modal_close {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 25px;
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3a3a3c;
+    border: 2px solid #3a3a3c;
+    border-radius: 4px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.modal_close:hover {
+    color: #000;
+    background-color: #3a3a3c;
+    border: 3px solid #121213;
+}
+.modal_close:active {
+    background-color: #fff;
+    border: 3px solid #121213;
+}
+/*----------- Tabla -------------------*/
+table {
+    display:table;
+	border: 1px solid #ccc;
+	width: 100%;
+	padding: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+}
+
+table tr {
+	padding: 5px;
+    border: 1px solid #ccc;
+}
+
+table tr:nth-child(even) {
+	background-color: #3a3a3c;
+    
+}
+
+table td, table th {
+	padding: 10px;
+	text-align: start;
+}
+
+table th {
+    text-transform: uppercase;
+    font-family: 16px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+#table-wrapper {
+    position: relative;
+}
+
+#table-scroll {
+    height: 400px;
+    overflow: auto;
+    margin-top: 20px;
+}
+
+#table-wrapper table {
+    width: 100%;
+}
+
+#table-wrapper table thead th .text {
+    position: absolute;
+    top: -20px;
+    z-index: 2;
+    height: 20px;
+    width: 35%;
+}
 /*================== tablet / PC ==================*/
 @media (min-width: 520px) {
     
@@ -130,8 +249,34 @@ footer a {
         flex-direction: column;
         align-items: center;
     }
+	table {
+		border:0;
+	}
 
-    /* section{
-        height: 850px;
-    } */
+	table tr {
+		margin-bottom: 5px;
+		display: block;
+        border: 1px solid #ccc;
+	}
+
+	table td {
+		display: block;
+		text-align: right;
+		font-size: 16px;
+	}
+
+	table td:last-child {
+		border-bottom: 0;
+	}
+
+	table td:before {
+		content: attr(data-label);
+		float: left;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	table thead {
+		display: none;
+	}
 }

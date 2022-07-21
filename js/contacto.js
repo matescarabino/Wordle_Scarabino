@@ -109,7 +109,50 @@ function redirigir(){
     window.location.href = "../index.html";
 }
 
+/*------------------------ mostrar puntajes ------------------------------------------*/
 
+function obtenerPuntajes() {
+
+    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
+
+    console.log(puntajesArray)
+
+    //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
+    let body = '';
+    for (var i = 0; i < puntajesArray.length; i++) {
+            body += `<tr role="row">
+                        <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
+                        <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="TIEMPO">a</td>
+                    </tr>`
+        }
+    document.getElementById('puntajes').innerHTML = body;
+}
+
+obtenerPuntajes()
+
+function mostrarModal() {
+    // Ejecuto modal -----------------------------------------------------------
+    let modal = document.getElementById("modalRegistro");
+    let span = document.getElementById("close");
+
+    // Lo hago visible
+    modal.style.display = "block";
+
+    // Si clickea el "botón" de aceptar escondo el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Si clickea fuera del modal, lo escondo
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 
 

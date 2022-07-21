@@ -15,42 +15,66 @@
     <body>
         <header>
             <div class="img_holder" onclick="redirigir();">
-                <img src="../Imagenes/left.png" alt="back">
+                <img src="../Imagenes/left.png" alt="Trofeo">
             </div>
             <h1><a href="../index.html">Wordle</a></h1>
-            <div class="img_holder">
+            <div class="img_holder" onclick="mostrarModal();">
                 <img src="../Imagenes/trofeo.png" alt="Trofeo">
-            </div>            
+            </div>       
         </header>
 
         <section>
             <form class="card" name="formulario" id="formulario">
                 <h2 class="card__title">Contacto</h2>
-
+        
                 <div class="card__campo">
                     <label class="card__campo__label" for="nombre">Nombre</label>
                     <input class="card__campo__input" type="text" id="nombreInput">
                     <div class="card__campo__error" id="errorNombre">&nbsp;</div>
                 </div>
-
-
+        
+        
                 <div class="card__campo">
                     <label class="card__campo__label" for="email">Email a reenviar</label>
                     <input class="card__campo__input" type="text" id="emailInput">
                     <div class="card__campo__error" id="errorMail">&nbsp;</div>
                 </div>
-
+        
                 <div class="card__campo_big">
                     <label class="card__campo__label" for="Mensaje">Mensaje</label>
                     <textarea class="card__campo__input" type="text" id="mensajeInput"></textarea>
                     <div class="card__campo__error" id="errorMensaje">&nbsp;</div>
                 </div>
-
-
+        
+        
                 <div class="card__button">
                     <button>Enviar</button>
                 </div>
             </form>
+            <!-- Modal -->
+            <div id="modalRegistro" class="modal">
+                <div class="modal_content">
+                    <p class="modal_message">PARTIDAS</p>
+                    <div id="table-wrapper">
+                        <div id="table-scroll">
+                            <table id="tabla" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>Fecha</th>
+                                        <th>Puntaje</th>
+                                        <th>Tiempo</th>
+                                    </tr>
+                                </thead>
+        
+                                <tbody id="puntajes">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="modal_close" id="close">CERRAR</p>
+                </div>
+            </div>
         </section>
 
         <footer>            

@@ -16,7 +16,7 @@
                 <img src="./Imagenes/correo.png" alt="Trofeo">
             </div>
             <h1><a href="./index.html">Wordle</a></h1>
-            <div class="img_holder">
+            <div class="img_holder" onclick="mostrarModal();">
                 <img src="./Imagenes/trofeo.png" alt="Trofeo">
             </div>        
         </header>
@@ -42,6 +42,30 @@
                 <!-- aca van los saves -->
             </div>
 
+            <!-- Modal -->
+            <div id="modalRegistro" class="modal">
+                <div class="modal_content">
+                    <p class="modal_message">PARTIDAS</p>
+                    <div id="table-wrapper">
+                        <div id="table-scroll">
+                            <table id="tabla" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>Fecha</th>
+                                        <th>Puntaje</th>
+                                        <th>Tiempo</th>
+                                    </tr>
+                                </thead>
+                
+                                <tbody id="puntajes">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="modal_close" id="close">CERRAR</p>
+                </div>
+            </div>
         </section>
 
         <footer>            

@@ -4,20 +4,20 @@
 
     let saveActual = new URLSearchParams(window.location.search);
 
-    let i = saveActual.get("save");
+    let save = saveActual.get("save");
 
-    if(i){
+    if(save){
         //Traigo del localStorage el array "saves"
         let savesArray = JSON.parse(localStorage.getItem('saves'));
 
-        window.palabra = savesArray[i].palabra
-        window.principal = savesArray[i].principal
-        window.colores = savesArray[i].colores
-        window.fila = savesArray[i].fila
-        window.columna = savesArray[i].columna
-        window.hours = savesArray[i].hours
-        window.minutes = savesArray[i].minutes
-        window.seconds = savesArray[i].seconds
+        window.palabra = savesArray[save].palabra
+        window.principal = savesArray[save].principal
+        window.colores = savesArray[save].colores
+        window.fila = savesArray[save].fila
+        window.columna = savesArray[save].columna
+        window.hours = savesArray[save].hours
+        window.minutes = savesArray[save].minutes
+        window.seconds = savesArray[save].seconds
 
         window.nombre = localStorage.getItem('nombre');
 
@@ -28,7 +28,52 @@
 
         cargarJuego();
     }else{
-        window.palabra = ['S','U','E','L','O'];
+        let arrayPalabras = [
+            ['S', 'U', 'E', 'L', 'O'],
+            ['D', 'U', 'L', 'C', 'E'],
+            ['M', 'E', 'N', 'O', 'S'],
+            ['J', 'U', 'N', 'T', 'O'],
+            ['U', 'N', 'I', 'C', 'O'],
+            ['P', 'A', 'R', 'T', 'E'],
+            ['F', 'R', 'U', 'T', 'A'],
+            ['V', 'I', 'L', 'L', 'A'],
+            ['N', 'O', 'R', 'T', 'E'],
+            ['H', 'A', 'S', 'T', 'A'],
+            ['U', 'N', 'I', 'D', 'O'],            
+            ['C', 'A', 'L', 'V', 'O'],
+            ['M', 'A', 'N', 'G', 'A'],
+            ['N', 'I', 'E', 'T', 'A'],
+            ['N', 'E', 'G', 'A', 'R'],
+            ['A', 'M', 'I', 'G', 'O'],
+            ['M', 'E', 'T', 'R', 'O'],
+            ['E', 'S', 'Q', 'U', 'I'],
+            ['Z', 'O', 'R', 'R', 'O'],
+            ['M', 'I', 'S', 'M', 'A'],
+            ['M', 'O', 'N', 'T', 'E'],
+            ['F', 'I', 'N', 'A', 'L'],
+            ['H', 'I', 'E', 'L', 'O'],
+            ['P', 'E', 'R', 'R', 'O'],
+            ['F', 'E', 'R', 'O', 'Z'],
+            ['C', 'I', 'E', 'L', 'O'],
+            ['S', 'I', 'E', 'T', 'E'],
+            ['A', 'S', 'A', 'D', 'O'],
+            ['L', 'I', 'B', 'R', 'O'],
+            ['M', 'E', 'D', 'I', 'R'],
+            ['S', 'A', 'C', 'A', 'R'],
+            ['T', 'A', 'R', 'D', 'E'],
+            ['L', 'O', 'G', 'R', 'O'],
+            ['C', 'A', 'R', 'T', 'A']];
+        
+        //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
+        let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
+        let idActual = Math.floor(Math.random() * 10)
+        
+        do{
+            idActual = Math.floor(Math.random() * 10)
+            window.palabra = arrayPalabras[idActual];
+        }while(idActual == idAnterior);
+
+        localStorage.setItem("idPalabraAnterior", idActual)
 
         window.principal = [
             ['', '', '', '', ''],
@@ -422,35 +467,75 @@ function saveProgress(){
     window.location.href = "../index.html";
 }
 
+
+
+
 /*------------------------ get/post apis ------------------------------------------*/
 
-//Metodo GET
-function obtenerPalabra() {
+// //Metodo GET
+// function obtenerPalabra() {
 
-    let url = 'https://wordle.danielfrg.com/words/5.json';
-    fetch(url)
-        .then(response => response.json())
-        .then(data => mostrarData(data))
-        .catch(error => mostrarError(error))
+//     let url = 'https://wordle.danielfrg.com/words/5.json';
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(data => mostrarData(data))
+//         .catch(error => mostrarError(error))
 
-    const mostrarData = (data) => {
-        console.log(data)
-    }
+//     const mostrarData = (data) => {
+//         console.log(data)
+//     }
 
-    const mostrarError = (error)  => {
-        console.log(error)
-    }
-}
-obtenerPalabra();
+//     const mostrarError = (error)  => {
+//         console.log(error)
+//     }
+// }
+// obtenerPalabra();
 
 
 /*------------------------------------------------------------------------------*/
 
 
+/*------------------------ mostrar puntajes ------------------------------------------*/
 
+function obtenerPuntajes() {
 
+    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
 
+    //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
+    let body = '';
+    for (var i = 0; i < puntajesArray.length; i++) {
+            body += `<tr role="row">
+                        <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
+                        <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="TIEMPO">a</td>
+                    </tr>`
+        }
+    document.getElementById('puntajes').innerHTML = body;
+}
 
+obtenerPuntajes()
 
+function mostrarModal() {
+    // Ejecuto modal -----------------------------------------------------------
+    let modal = document.getElementById("modalRegistro");
+    let span = document.getElementById("close");
+
+    // Lo hago visible
+    modal.style.display = "block";
+
+    // Si clickea el "botón" de aceptar escondo el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Si clickea fuera del modal, lo escondo
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 
