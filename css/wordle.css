@@ -23,9 +23,23 @@
     margin: 2px;
 }
 
-/* #juego{
-    display: none;
-} */
+.celda.girar{
+    animation: 0.5s linear flipping;
+}
+
+@keyframes flipping{
+    0%{
+        transform: rotateY(0deg);
+    }
+    50%{
+        transform: rotateY(90deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+
+
 /*--------------Teclado-------------------*/
 .card__teclado{
     width: 400px;
@@ -44,6 +58,7 @@
     color: #fff;
     margin:2px;
 }
+
 .card__teclado button:nth-child(11){
     margin-left: 22px;
 }

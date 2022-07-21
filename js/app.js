@@ -8,8 +8,8 @@
 
     if(i){
         //Traigo del localStorage el array "saves"
-        let savesArray = JSON.parse(localStorage.getItem('saves'));  
-        
+        let savesArray = JSON.parse(localStorage.getItem('saves'));
+
         window.palabra = savesArray[i].palabra
         window.principal = savesArray[i].principal
         window.colores = savesArray[i].colores
@@ -18,7 +18,7 @@
         window.hours = savesArray[i].hours
         window.minutes = savesArray[i].minutes
         window.seconds = savesArray[i].seconds
-        
+
         window.nombre = localStorage.getItem('nombre');
 
         window.appendHours = document.getElementById("hours");
@@ -30,25 +30,25 @@
     }else{
         window.palabra = ['S','U','E','L','O'];
 
-        window.principal = [ 
+        window.principal = [
             ['', '', '', '', ''],
             ['', '', '', '', ''],
             ['', '', '', '', ''],
             ['', '', '', '', ''],
             ['', '', '', '', ''],
             ['', '', '', '', '']];
-        
-        window.colores = [ 
+
+        window.colores = [
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]];
-    
+
         window.fila = 0;
         window.columna = 0;
-    
+
         window.hours = 00;
         window.minutes = 00;
         window.seconds = 00;
@@ -58,7 +58,7 @@
         window.Interval;
 
         window.nombre = localStorage.getItem('nombre');
-        
+
         cargarJuego();
 
     }
@@ -73,9 +73,9 @@ function cargarJuego(){
 
 
     for (var index = 0; index < window.principal.length; index++) {
-        
+
         for (var celda = 0; celda < window.principal[index].length; celda++) {
-            
+
             let valor = document.getElementById(`${index}${celda}`)
 
             valor.innerHTML = window.principal[index][celda];
@@ -108,7 +108,7 @@ function clickTecla(tecla){
             let del = document.getElementById('<<');
             del.style.backgroundColor = '#ff3333';
         }
-    } 
+    }
 
 }
 
@@ -168,64 +168,62 @@ function chequeo(){
 function validarCoincidencia() {
 
     for (let index = 0; index < 5; index++) {
+
         if (window.principal[fila][index] == window.palabra[index]) {
             window.colores[fila][index] = 1;
-        } 
-        else if (
-            (window.principal[fila][index] == window.palabra[0] ) ||
-            (window.principal[fila][index] == window.palabra[1] ) ||
-            (window.principal[fila][index] == window.palabra[2] ) ||
-            (window.principal[fila][index] == window.palabra[3] ) ||
-            (window.principal[fila][index] == window.palabra[4] )
-        ) {
+        }
+        else if ((window.palabra).includes(window.principal[fila][index])) 
+        {
             window.colores[fila][index] = 2;
-        } 
+        }
         else {
             window.colores[fila][index] = 3;
         }
     }
+
     pintarTeclado();
 }
 
 
-
 function pintarTablero(){
     for (var index = 0; index < window.colores.length; index++) {
-        
+
         for (var celda = 0; celda < window.colores[index].length; celda++) {
-            
+
             let valor = document.getElementById(`${index}${celda}`)
+                
+                switch (window.colores[index][celda]) {
 
-            switch (window.colores[index][celda]) {
+                    case 1:
+                        valor.classList.add('girar');
+                        valor.style.backgroundColor = '#33cc33';
+                        valor.style.color = '#000';
+                        break;
 
-                case 1:
-                valor.style.backgroundColor ='#33cc33'
-                valor.style.color ='#000'
-                    break;
+                    case 2:
+                        valor.classList.add('girar');
+                        valor.style.backgroundColor = '#ffff00';
+                        valor.style.color = '#000';
+                        break;
 
-                case 2:
-                valor.style.backgroundColor ='#ffff00'
-                valor.style.color ='#000'
-                    break;
+                    case 3:
+                        valor.classList.add('girar');
+                        valor.style.backgroundColor = '#121213';
+                        valor.style.border = '1px solid #3a3a3c';
+                        break;
 
-                case 3:
-                    valor.style.backgroundColor = '#121213'
-                    valor.style.border = '1px solid #3a3a3c'
-                    break;
-
-                default:
-                    break;
-            }
-
+                    default:
+                        break;
+                }
         }
     }
 }
 
 function pintarTeclado(){
     for (var index = 0; index < window.colores.length; index++) {
-        
+
         for (var celda = 0; celda < window.colores[index].length; celda++) {
-            
+
             let tecla = document.getElementById(principal[index][celda]);
 
             switch (window.colores[index][celda]) {
@@ -256,7 +254,7 @@ function pintarTeclado(){
 
 
 function validarVictoria(){
-    if(   
+    if(
         colores[fila][0] == 1 &&
         colores[fila][1] == 1 &&
         colores[fila][2] == 1 &&
@@ -271,7 +269,7 @@ function validarVictoria(){
 
             let boton1 = document.getElementById('boton1');
             boton1.style.display = 'flex';
-    
+
             let boton2 = document.getElementById('boton2');
             boton2.style.display = 'none';
 
@@ -286,7 +284,7 @@ function validarVictoria(){
         mensaje.style.color = 'red';
         mensaje.style.fontSize = '30px';
 
-        
+
         let teclado = document.getElementById('teclado');
         teclado.style.display = 'none';
 
@@ -314,7 +312,7 @@ function guardarVictoria(){
     let puntaje = {};
 
     puntaje.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
-    puntaje.nombre = window.nombre;           
+    puntaje.nombre = window.nombre;
 
     //calcular puntaje
     switch (fila) {
@@ -397,13 +395,13 @@ function stopTimer() {
 /*------------------------ guardarPartida ------------------------------------------*/
 
 function saveProgress(){
-    
+
     //Declaro un array "save" y le guardo los datos necesarios para poder continuar jugando en otro momento
     let save = {};
 
     save.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
-    save.nombre = window.nombre;           
-    save.palabra = window.palabra;           
+    save.nombre = window.nombre;
+    save.palabra = window.palabra;
     save.principal = window.principal;
     save.colores = window.colores;
     save.fila = window.fila;
@@ -426,24 +424,25 @@ function saveProgress(){
 
 /*------------------------ get/post apis ------------------------------------------*/
 
-// //Metodo GET 
-// function obtenerPalabra() {
+//Metodo GET
+function obtenerPalabra() {
 
-//     let url = 'https://wordle.danielfrg.com/words/5.json';
-//     fetch(url)
-//         .then(response => response.json())
-//         .then(data => mostrarData(data))
-//         .catch(error => mostrarError(error))
+    let url = 'https://wordle.danielfrg.com/words/5.json';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => mostrarData(data))
+        .catch(error => mostrarError(error))
 
-//     const mostrarData = (data) => {
-//         console.log(data)
-//     }
+    const mostrarData = (data) => {
+        console.log(data)
+    }
 
-//     const mostrarError = (error)  => {
-//         console.log(error)
-//     }
-// }
-// obtenerPalabra();
+    const mostrarError = (error)  => {
+        console.log(error)
+    }
+}
+obtenerPalabra();
+
 
 /*------------------------------------------------------------------------------*/
 

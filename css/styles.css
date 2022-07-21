@@ -9,7 +9,6 @@ section{
     display:flex;
     align-items: center;
     flex-direction: column;
-    border:1px solid red;
     margin-bottom: 20px;
 }
 
@@ -119,7 +118,6 @@ footer {
 }
 
 footer a {
-    border:1px solid red;
     text-decoration: none;
     color: #fff;
 }
