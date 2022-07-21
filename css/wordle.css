@@ -179,30 +179,22 @@
     }
     .card__matriz{
         width: 266px;
-        margin: 20px;
     }
     .celda{
         font-size: 20px;
-        background-color: #3a3a3c;
     }
-    .card__matriz div{
-        display: flex;
-    }
-    
+
     .card__matriz .celda{
         width: 52px;
         height: 52px;
-
         margin: 1px;
     }
     .card{
         width: 360px;
-        height: 600px;
     }
 
     .card__teclado{
         width: 360px;
-        margin-top: 20px;
     }
 
     .card__teclado button{
@@ -222,10 +214,6 @@
     }
     .card__button_save button {
         width: 240px;
-        padding: 1.3em 3em;
         font-size: 12px;
-        margin: 15px;
-        border-radius: 4px;
-
     }
 }

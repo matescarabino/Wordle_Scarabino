@@ -96,6 +96,6 @@ function clickSave(i) {
 
     saveActual.append("save", i);
 
-    location.href = "/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/html/wordle.html?" + saveActual.toString();
 
 }
