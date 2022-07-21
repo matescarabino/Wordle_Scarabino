@@ -275,6 +275,8 @@ function validarVictoria(){
             let boton2 = document.getElementById('boton2');
             boton2.style.display = 'none';
 
+            guardarVictoria();
+
             stopTimer();
     //valido derrota
     }else if(fila == 5){
@@ -306,6 +308,60 @@ function reset(){
 function mail(){
     window.location.href = "../html/contacto.html";
 }
+
+function guardarVictoria(){
+
+    let puntaje = {};
+
+    puntaje.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
+    puntaje.nombre = window.nombre;           
+
+    //calcular puntaje
+    switch (fila) {
+
+        case 0:
+            puntaje.puntaje = 6
+            break;
+
+        case 1:
+            puntaje.puntaje = 5
+            break;
+
+        case 2:
+            puntaje.puntaje = 4
+            break;
+
+        case 3:
+            puntaje.puntaje = 3
+            break;
+
+        case 4:
+            puntaje.puntaje = 2
+            break;
+
+        case 5:
+            puntaje.puntaje = 1
+            break;
+
+        default:
+            break;
+    }
+
+    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
+    puntajesArray.push(puntaje);
+    //Convierto mi array de puntajes a json
+    let puntajeArrayJSON = JSON.stringify(puntajesArray);
+    //Guardo mi array de puntajes en formato JSON en el local storage
+    localStorage.setItem("puntajes", puntajeArrayJSON)
+
+
+
+    console.log(puntajesArray)
+
+}
+
+
 /*------------------------ timer ------------------------------------------*/
 
 function start() {

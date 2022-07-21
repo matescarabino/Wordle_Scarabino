@@ -35,9 +35,10 @@ window.onload = function () {
         }
 
         let parametroMail = (mail.value).toLowerCase();
+        let parametroNombre = nombre.value;
 
         //redirige a la herramienta predeterminada de mail con los siguientes parametros
-        location.href = "mailto:"+'matescarabino@gmail.com'+'?cc='+parametroMail+'&subject='+'Contacto'+'&body='+mensaje.value;
+        location.href = "mailto:"+'matescarabino@gmail.com'+'?cc='+parametroMail+'&subject='+'Contacto'+'&body='+'Saludos, mi nombre es '+parametroNombre+'. '+mensaje.value;
 
         redirigir();
 
