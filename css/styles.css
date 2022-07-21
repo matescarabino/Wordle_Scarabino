@@ -6,12 +6,12 @@ body{
 
 }
 section{
+    height: 800px;
     display:flex;
     align-items: center;
     flex-direction: column;
-
-
 }
+
 .card{
     width: 410px;
     display:flex;
@@ -113,7 +113,7 @@ footer {
     margin-top: auto;
     bottom: 0;
     width: 100%;
-    position: fixed;
+    position: static;
     padding: 20px 0px 20px 0px;
     background: #121213;
     border-top:2px solid #3a3a3c ;
@@ -134,4 +134,7 @@ footer a {
         align-items: center;
     }
 
+    section{
+        height: 850px;
+    }
 }

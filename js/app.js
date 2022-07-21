@@ -355,10 +355,6 @@ function guardarVictoria(){
     //Guardo mi array de puntajes en formato JSON en el local storage
     localStorage.setItem("puntajes", puntajeArrayJSON)
 
-
-
-    console.log(puntajesArray)
-
 }
 
 
