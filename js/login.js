@@ -96,10 +96,10 @@ function clickSave(save) {
 
     saveActual.append("save", save);
 
-    window.location.href = "/html/wordle.html?" + saveActual.toString();
+    // window.location.href = "/html/wordle.html?" + saveActual.toString();
 
     // //para github
-    // window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 
 }
 
@@ -109,8 +109,6 @@ function obtenerPuntajes() {
 
     //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
     let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
-
-    console.log(puntajesArray)
 
     //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
     let body = '';

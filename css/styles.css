@@ -19,6 +19,22 @@ section{
     align-items: center;
 }
 
+.card__campo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+.card__campo_big {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.card__campo_big textarea {
+    height: 80px;
+}
 .card__title {
     display: flex;
     justify-content: center;

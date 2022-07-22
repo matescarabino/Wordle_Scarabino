@@ -59,17 +59,13 @@
     margin:2px;
 }
 
-.card__teclado button:nth-child(11){
-    margin-left: 22px;
-}
-
-.card__teclado button:nth-child(20){
+.card__teclado button:nth-child(21){
     width: 56px;
     font-size: 12px;
     background-color: #70db70;
     color:#000;
 }
-.card__teclado button:nth-child(28){
+.card__teclado button:nth-child(29){
     width: 56px;
     font-size: 12px;
     background-color: #ff6666;
@@ -84,11 +80,11 @@
     color:#000;
 }
 
-.card__teclado button:nth-child(20):active {
+.card__teclado button:nth-child(21):active {
     background-color: #70db70;
 }
 
-.card__teclado button:nth-child(28):active {
+.card__teclado button:nth-child(29):active {
     background-color: #ff6666;
 }
 /*--------------mensaje-------------------*/
@@ -173,14 +169,11 @@
         height: 58px;
         margin:4px;
     }
-    .card__teclado button:nth-child(11){
-        margin-left: 30px;
-    }
 
-    .card__teclado button:nth-child(20) {
+    .card__teclado button:nth-child(21) {
         width: 68px;
     }
-    .card__teclado button:nth-child(28){
+    .card__teclado button:nth-child(29){
         width: 68px;
     }
 
@@ -215,14 +208,11 @@
         height: 46px;
         margin:1px;
     }
-    .card__teclado button:nth-child(11){
-        margin-left: 20px;
-    }
-
-    .card__teclado button:nth-child(20) {
+  
+    .card__teclado button:nth-child(21) {
         width: 52px;
     }
-    .card__teclado button:nth-child(28){
+    .card__teclado button:nth-child(29){
         width: 52px;
     }
     .card__button_save button {

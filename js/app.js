@@ -1,6 +1,12 @@
-/*------------------------ obetener partida ------------------------------------------*/
+window.onload = () => {
+    declararVaribles();
 
-// function getSave(){
+    obtenerPuntajes();
+
+
+}
+
+const declararVaribles = async() => {
 
     let saveActual = new URLSearchParams(window.location.search);
 
@@ -28,52 +34,13 @@
 
         cargarJuego();
     }else{
-        let arrayPalabras = [
-            ['S', 'U', 'E', 'L', 'O'],
-            ['D', 'U', 'L', 'C', 'E'],
-            ['M', 'E', 'N', 'O', 'S'],
-            ['J', 'U', 'N', 'T', 'O'],
-            ['U', 'N', 'I', 'C', 'O'],
-            ['P', 'A', 'R', 'T', 'E'],
-            ['F', 'R', 'U', 'T', 'A'],
-            ['V', 'I', 'L', 'L', 'A'],
-            ['N', 'O', 'R', 'T', 'E'],
-            ['H', 'A', 'S', 'T', 'A'],
-            ['U', 'N', 'I', 'D', 'O'],            
-            ['C', 'A', 'L', 'V', 'O'],
-            ['M', 'A', 'N', 'G', 'A'],
-            ['N', 'I', 'E', 'T', 'A'],
-            ['N', 'E', 'G', 'A', 'R'],
-            ['A', 'M', 'I', 'G', 'O'],
-            ['M', 'E', 'T', 'R', 'O'],
-            ['E', 'S', 'Q', 'U', 'I'],
-            ['Z', 'O', 'R', 'R', 'O'],
-            ['M', 'I', 'S', 'M', 'A'],
-            ['M', 'O', 'N', 'T', 'E'],
-            ['F', 'I', 'N', 'A', 'L'],
-            ['H', 'I', 'E', 'L', 'O'],
-            ['P', 'E', 'R', 'R', 'O'],
-            ['F', 'E', 'R', 'O', 'Z'],
-            ['C', 'I', 'E', 'L', 'O'],
-            ['S', 'I', 'E', 'T', 'E'],
-            ['A', 'S', 'A', 'D', 'O'],
-            ['L', 'I', 'B', 'R', 'O'],
-            ['M', 'E', 'D', 'I', 'R'],
-            ['S', 'A', 'C', 'A', 'R'],
-            ['T', 'A', 'R', 'D', 'E'],
-            ['L', 'O', 'G', 'R', 'O'],
-            ['C', 'A', 'R', 'T', 'A']];
-        
-        //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
-        let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
-        let idActual = Math.floor(Math.random() * 10)
-        
-        do{
-            idActual = Math.floor(Math.random() * 10)
-            window.palabra = arrayPalabras[idActual];
-        }while(idActual == idAnterior);
 
-        localStorage.setItem("idPalabraAnterior", idActual)
+        await cargarPalabras()
+            .then(data => {
+                 palabras = data;
+        })
+
+        elegirPalabra();
 
         window.principal = [
             ['', '', '', '', ''],
@@ -108,8 +75,7 @@
 
     }
 
-
-// }
+}
 
 
 /*------------------------ cargar juego ------------------------------------------*/
@@ -182,9 +148,10 @@ function del(){
 function enter(){
 
     if(columna == 5 && fila != 5){
-        chequeo();
-        fila++;
-        columna = 0;
+        if(chequeo()==true){
+            fila++;
+            columna = 0;
+        }
     }else if (columna == 5 && fila == 5){
         chequeo();
     }
@@ -200,14 +167,29 @@ function enter(){
 /*----------------------------funciones juego--------------------------------------*/
 
 function chequeo(){
-    console.log('validar si palabra existe');
 
-    validarCoincidencia();
+    if(validarSiExiste()){
 
-    pintarTablero();
+        validarCoincidencia();
 
-    validarVictoria();
+        pintarTablero();
+    
+        validarVictoria();
+        return true
+    }else{
+        return false
+    }
+}
 
+function validarSiExiste() {
+
+    let palabraUsuario = window.principal[window.fila].join("").toLowerCase();
+
+    if(palabras.includes(palabraUsuario)){
+        return true
+    }else{
+        return false
+    }
 }
 
 function validarCoincidencia() {
@@ -228,7 +210,6 @@ function validarCoincidencia() {
 
     pintarTeclado();
 }
-
 
 function pintarTablero(){
     for (var index = 0; index < window.colores.length; index++) {
@@ -295,8 +276,6 @@ function pintarTeclado(){
         }
     }
 }
-
-
 
 function validarVictoria(){
     if(
@@ -400,14 +379,12 @@ function guardarVictoria(){
 
 }
 
-
 /*------------------------ timer ------------------------------------------*/
 
 function start() {
     clearInterval(window.Interval);
     window.Interval = setInterval(startTimer, 1000);
 }
-
 
 function startTimer() {
     seconds++;
@@ -463,37 +440,33 @@ function saveProgress(){
     //Guardo mi array de saves en formato JSON en el local storage
     localStorage.setItem("saves", savesArrayJSON)
 
-    // console.log(savesArray)
     window.location.href = "../index.html";
 }
 
+/*------------------------ cargarPalabras ------------------------------------------*/
 
+const cargarPalabras = async() => {
+    let url = '../Storage/palabras.json';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    return data;
+}
 
+const elegirPalabra = () => {
+    //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
+    let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
+    let idActual = 0;
 
-/*------------------------ get/post apis ------------------------------------------*/
+    do{
+        idActual = Math.floor(Math.random() * palabras.length);
+    }while(idActual == idAnterior);
 
-// //Metodo GET
-// function obtenerPalabra() {
+    localStorage.setItem("idPalabraAnterior", idActual)
 
-//     let url = 'https://wordle.danielfrg.com/words/5.json';
-//     fetch(url)
-//         .then(response => response.json())
-//         .then(data => mostrarData(data))
-//         .catch(error => mostrarError(error))
+    let palabraAleatoria = (palabras[idActual]).toUpperCase()
 
-//     const mostrarData = (data) => {
-//         console.log(data)
-//     }
-
-//     const mostrarError = (error)  => {
-//         console.log(error)
-//     }
-// }
-// obtenerPalabra();
-
-
-/*------------------------------------------------------------------------------*/
-
+    window.palabra = palabraAleatoria.split('')
+}
 
 /*------------------------ mostrar puntajes ------------------------------------------*/
 
@@ -515,7 +488,6 @@ function obtenerPuntajes() {
     document.getElementById('puntajes').innerHTML = body;
 }
 
-obtenerPuntajes()
 
 function mostrarModal() {
     // Ejecuto modal -----------------------------------------------------------
