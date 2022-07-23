@@ -1,7 +1,7 @@
 /*--------------Matriz-------------------*/
 
 .card__matriz{
-    width: 330px;
+    width: 266px;
     margin: 20px;
 }
 .celda{
@@ -13,8 +13,8 @@
 }
 
 .card__matriz .celda{
-    width: 62px;
-    height: 62px;
+    width: 52px;
+    height: 52px;;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -24,7 +24,7 @@
 }
 
 .celda.girar{
-    animation: 0.5s linear flipping;
+    animation: 0.7s linear flipping;
 }
 
 @keyframes flipping{
@@ -182,18 +182,6 @@
 
 @media (max-width: 400px) {
 
-    .card__matriz{
-        width: 266px;
-    }
-    .celda{
-        font-size: 20px;
-    }
-
-    .card__matriz .celda{
-        width: 52px;
-        height: 52px;
-        margin: 1px;
-    }
     .card{
         width: 360px;
     }

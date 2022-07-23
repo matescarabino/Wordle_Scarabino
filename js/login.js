@@ -96,10 +96,10 @@ function clickSave(save) {
 
     saveActual.append("save", save);
 
-    // window.location.href = "/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/html/wordle.html?" + saveActual.toString();
 
     // //para github
-    window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
+    // window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 
 }
 
@@ -123,7 +123,6 @@ function obtenerPuntajes() {
     document.getElementById('puntajes').innerHTML = body;
 }
 
-obtenerPuntajes()
 
 function mostrarModal() {
     // Ejecuto modal -----------------------------------------------------------
@@ -144,4 +143,35 @@ function mostrarModal() {
             modal.style.display = "none";
         }
     }
+    obtenerPuntajes()
+}
+
+function ordenalTablaPuntaje() {
+    
+    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
+
+    //ordeno el array de puntajes por puntaje de mayor a menor
+    puntajesArray.sort(function (a, b){
+        if (a.puntaje > b.puntaje) {
+            return 1;
+          }
+          if (a.puntaje < b.puntaje) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+    });
+
+    //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
+    let body = '';
+    for (var i = 0; i < puntajesArray.length; i++) {
+            body += `<tr role="row">
+                        <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
+                        <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="TIEMPO">a</td>
+                    </tr>`
+        }
+    document.getElementById('puntajes').innerHTML = body;
 }

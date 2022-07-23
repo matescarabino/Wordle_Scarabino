@@ -35,12 +35,17 @@ const declararVaribles = async() => {
         cargarJuego();
     }else{
 
-        await cargarPalabras()
+        await cargarPalabraJugadora()
             .then(data => {
                  palabras = data;
         })
 
         elegirPalabra();
+
+        await obtenerListaPalabras()
+        .then(data => {
+             listaPalabras = data;
+        })
 
         window.principal = [
             ['', '', '', '', ''],
@@ -185,7 +190,7 @@ function validarSiExiste() {
 
     let palabraUsuario = window.principal[window.fila].join("").toLowerCase();
 
-    if(palabras.includes(palabraUsuario)){
+    if(listaPalabras.includes(palabraUsuario)){
         return true
     }else{
         return false
@@ -445,8 +450,8 @@ function saveProgress(){
 
 /*------------------------ cargarPalabras ------------------------------------------*/
 
-const cargarPalabras = async() => {
-    let url = '../Storage/palabras.json';
+const cargarPalabraJugadora = async() => {
+    let url = '../Storage/palabrasJugadoras.json';
     const resp = await fetch(url);
     const data = await resp.json();
     return data;
@@ -466,8 +471,16 @@ const elegirPalabra = () => {
     let palabraAleatoria = (palabras[idActual]).toUpperCase()
 
     window.palabra = palabraAleatoria.split('')
+
+    console.log(window.palabra)
 }
 
+const obtenerListaPalabras = async() => {
+    let url = '../Storage/listaPalabras.json';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    return data;
+}
 /*------------------------ mostrar puntajes ------------------------------------------*/
 
 function obtenerPuntajes() {
@@ -508,6 +521,35 @@ function mostrarModal() {
             modal.style.display = "none";
         }
     }
+    obtenerPuntajes()
 }
 
+function ordenalTablaPuntaje() {
+    
+    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
 
+    //ordeno el array de puntajes por puntaje de mayor a menor
+    puntajesArray.sort(function (a, b){
+        if (a.puntaje > b.puntaje) {
+            return 1;
+          }
+          if (a.puntaje < b.puntaje) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+    });
+
+    //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
+    let body = '';
+    for (var i = 0; i < puntajesArray.length; i++) {
+            body += `<tr role="row">
+                        <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
+                        <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="TIEMPO">a</td>
+                    </tr>`
+        }
+    document.getElementById('puntajes').innerHTML = body;
+}
