@@ -123,7 +123,6 @@ function obtenerPuntajes() {
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
                         <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
-                        <td data-label="TIEMPO">a</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
@@ -176,7 +175,6 @@ function ordenalTablaPuntaje() {
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
                         <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
-                        <td data-label="TIEMPO">a</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
