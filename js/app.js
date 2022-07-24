@@ -12,6 +12,12 @@ const declararVaribles = async() => {
 
     let save = saveActual.get("save");
 
+    
+    await obtenerListaPalabras()
+    .then(data => {
+         listaPalabras = data;
+    })
+
     if(save){
         //Traigo del localStorage el array "saves"
         let savesArray = JSON.parse(localStorage.getItem('saves'));
@@ -41,11 +47,6 @@ const declararVaribles = async() => {
         })
 
         elegirPalabra();
-
-        await obtenerListaPalabras()
-        .then(data => {
-             listaPalabras = data;
-        })
 
         window.principal = [
             ['', '', '', '', ''],
@@ -156,9 +157,13 @@ function enter(){
         if(chequeo()==true){
             fila++;
             columna = 0;
+        }else{
+            console.log('eso no por favor')
         }
     }else if (columna == 5 && fila == 5){
-        chequeo();
+        if(chequeo()!=true){
+            console.log('eso no por favor')
+        }
     }
     if (columna != 5){
         let enter = document.getElementById('ENTER');
@@ -196,23 +201,85 @@ function validarSiExiste() {
         return false
     }
 }
-
 function validarCoincidencia() {
 
+    palabra = ['L', 'A', 'D', 'E', 'E'];
+
+    console.log(palabra)
+    ////////////////////////// Array auxiliar para contar la cantidad de letras
+    let arrayAux = [
+        ['', '', '', '', ''],
+        [0, 0, 0, 0, 0]
+    ];
+    
     for (let index = 0; index < 5; index++) {
 
-        if (window.principal[fila][index] == window.palabra[index]) {
-            window.colores[fila][index] = 1;
-        }
-        else if ((window.palabra).includes(window.principal[fila][index])) 
-        {
-            window.colores[fila][index] = 2;
-        }
-        else {
-            window.colores[fila][index] = 3;
+        if (!((arrayAux[0]).includes(palabra[index]))) {
+
+            arrayAux[0][index] = palabra[index]
         }
     }
 
+    for (let index = 0; index < 5; index++) {
+
+        for (let index2 = 0; index2 < 5; index2++) {
+
+            if(arrayAux[0][index] == palabra[index2]){
+
+                arrayAux[1][index] ++
+
+            }
+                
+        }
+
+    }
+
+    ////////////////////////// VERDE
+    for (let index = 0; index < 5; index++) {
+
+        if (principal[fila][index] == palabra[index]) {
+
+            colores[fila][index] = 1;
+
+            for (let index2 = 0; index2 < 5; index2++) {
+
+
+                if (principal[fila][index] == arrayAux[0][index2]) {
+
+                    let valor = arrayAux[1][index2]
+
+                    if (valor > 0) {
+                        arrayAux[1][index2]--
+                    }
+                }
+
+            }
+
+        } else {
+            colores[fila][index] = 3;
+        }
+
+    }
+
+    ////////////////////////// AMARILLO
+    for (let index = 0; index < 5; index++) {
+
+        for (let index2 = 0; index2 < 5; index2++) {
+
+            if (principal[fila][index] == arrayAux[0][index2] && (principal[fila][index] != palabra[index])) {
+
+                let valor = arrayAux[1][index2]
+
+                if (valor > 0) {
+                    colores[fila][index] = 2;
+
+                    arrayAux[1][index2]--
+                }
+            }
+        }
+
+    }
+   
     pintarTeclado();
 }
 
@@ -250,7 +317,7 @@ function pintarTablero(){
     }
 }
 
-function pintarTeclado(){
+function pintarTeclado() {
     for (var index = 0; index < window.colores.length; index++) {
 
         for (var celda = 0; celda < window.colores[index].length; celda++) {
@@ -260,18 +327,22 @@ function pintarTeclado(){
             switch (window.colores[index][celda]) {
 
                 case 1:
-                    tecla.style.backgroundColor ='#33cc33'
-                    tecla.style.color ='#000'
+                    tecla.style.backgroundColor = '#33cc33'
+                    tecla.style.color = '#000'
                     break;
 
                 case 2:
-                    tecla.style.backgroundColor ='#ffff00'
-                    tecla.style.color ='#000'
+                    tecla.style.backgroundColor = '#ffff00'
+                    tecla.style.color = '#000'
                     break;
 
                 case 3:
-                    tecla.style.backgroundColor = '#121213'
-                    tecla.style.border = '1px solid #3a3a3c'
+                    console.log(tecla.style.backgroundColor)
+                    if ((tecla.style.backgroundColor != 'rgb(51, 204, 51)') && (tecla.style.backgroundColor != 'rgb(255, 255, 0)')) {
+                        tecla.style.backgroundColor = '#121213'
+                        tecla.style.color = '#fff'
+                        tecla.style.border = '1px solid #3a3a3c'
+                    }
                     break;
 
                 default:
@@ -468,7 +539,7 @@ const elegirPalabra = () => {
 
     localStorage.setItem("idPalabraAnterior", idActual)
 
-    let palabraAleatoria = (palabras[idActual]).toUpperCase()
+    window.palabraAleatoria = (palabras[idActual]).toUpperCase()
 
     window.palabra = palabraAleatoria.split('')
 
