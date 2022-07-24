@@ -203,9 +203,6 @@ function validarSiExiste() {
 }
 function validarCoincidencia() {
 
-    palabra = ['L', 'A', 'D', 'E', 'E'];
-
-    console.log(palabra)
     ////////////////////////// Array auxiliar para contar la cantidad de letras
     let arrayAux = [
         ['', '', '', '', ''],
