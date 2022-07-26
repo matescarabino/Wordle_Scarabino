@@ -96,10 +96,10 @@ function clickSave(save) {
 
     saveActual.append("save", save);
 
-    window.location.href = "/html/wordle.html?" + saveActual.toString();
+    // window.location.href = "/html/wordle.html?" + saveActual.toString();
 
     // //para github
-    // window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 
 }
 
