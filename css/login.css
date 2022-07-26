@@ -2,7 +2,7 @@
 .card__campo__input {
     display: flex;
     height: 35px;
-    width: 350px;
+    width: 100%;
     font-size: large;
 }
 
@@ -118,6 +118,9 @@
 /*================== dispositivos pequenios ==================*/
 
 @media (max-width: 400px) {
+    .card{
+        width: 360px;
+    }
     .card_saves{
         width: 360px;
         margin-top: 10px;
@@ -128,4 +131,5 @@
         width: 176px;
         height: 65px;
     }
+
 }

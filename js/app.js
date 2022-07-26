@@ -67,9 +67,9 @@ const declararVaribles = async() => {
         window.fila = 0;
         window.columna = 0;
 
-        window.hours = 00;
-        window.minutes = 00;
-        window.seconds = 00;
+        window.hours = 0;
+        window.minutes = 0;
+        window.seconds = 57;
         window.appendHours = document.getElementById("hours");
         window.appendMinutes = document.getElementById("minutes");
         window.appendSeconds = document.getElementById("seconds");
@@ -416,26 +416,32 @@ function guardarVictoria(){
 
         case 0:
             puntaje.puntaje = 6
+            puntaje.puntajeMensaje = 'Perfecto' + '<br>'+ '6'
             break;
 
         case 1:
             puntaje.puntaje = 5
+            puntaje.puntajeMensaje = 'Sobresaliente' + '<br>'+ '5'
             break;
 
         case 2:
             puntaje.puntaje = 4
+            puntaje.puntajeMensaje = 'Excelente' + '<br>'+ '4'
             break;
 
         case 3:
             puntaje.puntaje = 3
+            puntaje.puntajeMensaje = 'Muy bien' + '<br>'+ '3'
             break;
 
         case 4:
             puntaje.puntaje = 2
+            puntaje.puntajeMensaje = 'Bien' + '<br>'+ '2'
             break;
 
         case 5:
             puntaje.puntaje = 1
+            puntaje.puntajeMensaje = 'Regular' + '<br>'+ '1'
             break;
 
         default:
@@ -470,7 +476,8 @@ function startTimer() {
     if (hours > 9) { appendHours.innerHTML = hours; }
 
     if (seconds >= 59) {
-        appendMinutes.innerHTML = minutes;
+        
+        appendMinutes.innerHTML = '0' + minutes;
         seconds = -1;
         minutes++;
     }
@@ -561,7 +568,7 @@ function obtenerPuntajes() {
             body += `<tr role="row">
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
-                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntajeMensaje)}</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
@@ -613,7 +620,7 @@ function ordenalTablaPuntaje() {
             body += `<tr role="row">
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
-                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntajeMensaje)}</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;

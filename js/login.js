@@ -96,10 +96,10 @@ function clickSave(save) {
 
     saveActual.append("save", save);
 
-    // window.location.href = "/html/wordle.html?" + saveActual.toString();
+    window.location.href = "/html/wordle.html?" + saveActual.toString();
 
     // //para github
-    window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
+    // window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 
 }
 
@@ -116,7 +116,7 @@ function obtenerPuntajes() {
             body += `<tr role="row">
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
-                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntajeMensaje)}</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
@@ -168,7 +168,7 @@ function ordenalTablaPuntaje() {
             body += `<tr role="row">
                         <td data-label="NOMBRE">${(puntajesArray[puntajesArray.length-1-i].nombre)}</td>
                         <td data-label="FECHA">${(puntajesArray[puntajesArray.length-1-i].fecha)}</td>
-                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntaje)}</td>
+                        <td data-label="PUNTAJE">${(puntajesArray[puntajesArray.length-1-i].puntajeMensaje)}</td>
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
