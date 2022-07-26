@@ -81,6 +81,7 @@ const declararVaribles = async() => {
 
     }
 
+    console.log(palabra)
 }
 
 
@@ -158,11 +159,11 @@ function enter(){
             fila++;
             columna = 0;
         }else{
-            console.log('eso no por favor')
+            mostrarMensajeError();
         }
     }else if (columna == 5 && fila == 5){
         if(chequeo()!=true){
-            console.log('eso no por favor')
+            mostrarMensajeError();
         }
     }
     if (columna != 5){
@@ -334,7 +335,6 @@ function pintarTeclado() {
                     break;
 
                 case 3:
-                    console.log(tecla.style.backgroundColor)
                     if ((tecla.style.backgroundColor != 'rgb(51, 204, 51)') && (tecla.style.backgroundColor != 'rgb(255, 255, 0)')) {
                         tecla.style.backgroundColor = '#121213'
                         tecla.style.color = '#fff'
@@ -367,8 +367,8 @@ function validarVictoria(){
             let boton1 = document.getElementById('boton1');
             boton1.style.display = 'flex';
 
-            let boton2 = document.getElementById('boton2');
-            boton2.style.display = 'none';
+            let enter = document.getElementById('ENTER');
+            enter.style.display = 'none';
 
             guardarVictoria();
 
@@ -377,7 +377,7 @@ function validarVictoria(){
     }else if(fila == 5){
         let mensaje = document.getElementById('mensaje');
         //mensaje temporal... despues hay q hacer un modal
-        mensaje.innerHTML = 'Derrota, la palabra era: '+ palabra[0]+palabra[1]+palabra[2]+palabra[3]+palabra[4];
+        mensaje.innerHTML = 'Derrota, la palabra era: '+ palabra.join('');
         mensaje.style.color = 'red';
         mensaje.style.fontSize = '30px';
 
@@ -540,7 +540,6 @@ const elegirPalabra = () => {
 
     window.palabra = palabraAleatoria.split('')
 
-    console.log(window.palabra)
 }
 
 const obtenerListaPalabras = async() => {
@@ -618,4 +617,20 @@ function ordenalTablaPuntaje() {
                     </tr>`
         }
     document.getElementById('puntajes').innerHTML = body;
+}
+
+
+function mostrarMensajeError() {
+
+    let mensaje = document.getElementById('mensaje');
+    //muestro mensaje
+    mensaje.innerHTML = 'Esa palabra no esta en nuestro diccionario'
+    mensaje.style.color = 'red';
+    mensaje.style.fontSize = '18px';    
+    //lo borro luego de 2 segundos
+    setTimeout(function () {
+        mensaje.innerHTML = '';
+        mensaje.style.color = 'green';
+        mensaje.style.fontSize = '60px';
+    }, 2000);
 }

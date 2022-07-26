@@ -62,13 +62,15 @@
 .card__teclado button:nth-child(21){
     width: 56px;
     font-size: 12px;
-    background-color: #70db70;
+    background-color: #0099ff;
+    font-weight: bold;
     color:#000;
 }
 .card__teclado button:nth-child(29){
     width: 56px;
     font-size: 12px;
     background-color: #ff6666;
+    font-weight: bold;
     color:#000;
 }
 
@@ -81,7 +83,7 @@
 }
 
 .card__teclado button:nth-child(21):active {
-    background-color: #70db70;
+    background-color: #006bb3;
 }
 
 .card__teclado button:nth-child(29):active {
@@ -90,22 +92,22 @@
 /*--------------mensaje-------------------*/
 
 .card__mensaje{
-    width: 400px;
+    height: 20px;
     text-align: center;
     font-size: 60px;
     color: #33cc33;
 }
 
-/*--------------boton-------------------*/
+/*--------------boton enter-------------------*/
 
 .card__button {
     width: 100%;
     display: none;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
-.card__button_save button {
+.card__button_enter button {
     width: 270px;
     padding: 1.3em 3em;
     font-size: 14px;
@@ -114,28 +116,25 @@
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: bold;
-    color: #fff;
-    background-color: #3a3a3c;
-    border: 3px solid #3a3a3c;
+    color: #000;
+    background-color: #33cc33;
+    border: 1px solid #121213;
     cursor: pointer;
     outline: none;
 }
 
-.card__button_save {
+.card__button_enter {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
-.card__button_save button:hover {
-    color: #000;
-    background-color: #3a3a3c;
-    border: 3px solid #121213;
+.card__button_enter button:hover {
+    background-color: #33cc33;
+    border: 1px solid #fff;
 }
-.card__button_save button:active {
-    background-color: #fff;
-    border: 3px solid #121213;
+.card__button_enter button:active {
+    background-color: #70db70;
 }
 
 /*--------------timer-------------------*/
@@ -186,9 +185,31 @@
         width: 360px;
     }
 
+    .card__matriz{
+        width: 232px;
+        margin: 10px;
+    }
+    .celda{
+        font-size: 20px;
+        background-color: #3a3a3c;
+    }
+    .card__matriz div{
+        display: flex;
+    }
+    
+    .card__matriz .celda{
+        width: 45px;
+        height: 45px;;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:#fff;
+        margin: 2px;
+    }
     .card__teclado{
         width: 360px;
-        margin:0px
+        margin:10px
     }
 
     .card__teclado button{
@@ -209,4 +230,14 @@
         margin:0px
 
     }
+
+    /*--------------timer-------------------*/
+
+#seconds, #minutes, #hours {
+    font-size: 20px;
+}
+
+.cronometer-row{
+    margin-top: 10px;
+}
 }
