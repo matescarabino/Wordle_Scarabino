@@ -388,8 +388,8 @@ function validarVictoria(){
         let boton1 = document.getElementById('boton1');
         boton1.style.display = 'flex';
 
-        let boton2 = document.getElementById('boton2');
-        boton2.style.display = 'none';
+        let enter = document.getElementById('ENTER');
+        enter.style.display = 'none';
 
         stopTimer();
     }
