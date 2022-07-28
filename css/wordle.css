@@ -74,12 +74,10 @@
     color:#000;
 }
 
-.card__teclado button:hover{
-    border: 2px solid #121213;
-}
+
 .card__teclado button:active{
-    background-color: #fff;
-    color:#000;
+    border: 2px solid #121213;
+
 }
 
 .card__teclado button:nth-child(21):active {

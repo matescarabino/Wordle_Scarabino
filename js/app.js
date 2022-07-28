@@ -12,7 +12,6 @@ const declararVaribles = async() => {
 
     let save = saveActual.get("save");
 
-    
     await obtenerListaPalabras()
     .then(data => {
          listaPalabras = data;
@@ -69,7 +68,7 @@ const declararVaribles = async() => {
 
         window.hours = 0;
         window.minutes = 0;
-        window.seconds = 57;
+        window.seconds = 0;
         window.appendHours = document.getElementById("hours");
         window.appendMinutes = document.getElementById("minutes");
         window.appendSeconds = document.getElementById("seconds");
@@ -111,6 +110,9 @@ function cargarJuego(){
 /*------------------------ funciones del teclado ------------------------------------------*/
 
 function clickTecla(tecla){
+    const audio = new Audio();
+    audio.src = "../sounds/click.mp3"
+    audio.play();
 
     if(columna < 5){
         principal[fila][columna] = tecla;
@@ -131,6 +133,10 @@ function clickTecla(tecla){
 }
 
 function del(){
+    const audio = new Audio();
+    audio.src = "../sounds/click.mp3"
+    audio.play();
+
     if(columna == 0){
         principal[fila][columna] = '';
         valor = document.getElementById(`${fila}${columna}`);
@@ -336,9 +342,9 @@ function pintarTeclado() {
 
                 case 3:
                     if ((tecla.style.backgroundColor != 'rgb(51, 204, 51)') && (tecla.style.backgroundColor != 'rgb(255, 255, 0)')) {
-                        tecla.style.backgroundColor = '#121213'
+            
+                        tecla.style.backgroundColor = '#1a1a1a'
                         tecla.style.color = '#fff'
-                        tecla.style.border = '1px solid #3a3a3c'
                     }
                     break;
 
@@ -358,6 +364,10 @@ function validarVictoria(){
         colores[fila][3] == 1 &&
         colores[fila][4] == 1)
         {
+            const audio = new Audio();
+            audio.src = "../sounds/victory.wav"
+            audio.play();
+
             let mensaje = document.getElementById('mensaje');
             mensaje.innerHTML = 'Victoria';
 
@@ -375,8 +385,11 @@ function validarVictoria(){
             stopTimer();
     //valido derrota
     }else if(fila == 5){
+        const audio = new Audio();
+        audio.src = "../sounds/defeat.wav"
+        audio.play();
+
         let mensaje = document.getElementById('mensaje');
-        //mensaje temporal... despues hay q hacer un modal
         mensaje.innerHTML = 'Derrota, la palabra era: '+ palabra.join('');
         mensaje.style.color = 'red';
         mensaje.style.fontSize = '30px';
@@ -392,6 +405,10 @@ function validarVictoria(){
         enter.style.display = 'none';
 
         stopTimer();
+    }else{
+        const audio = new Audio();
+        audio.src = "../sounds/flip.mp3"
+        audio.play();
     }
 }
 
@@ -497,7 +514,10 @@ function stopTimer() {
 /*------------------------ guardarPartida ------------------------------------------*/
 
 function saveProgress(){
-
+    const audio = new Audio();
+    audio.src = "../sounds/click.mp3"
+    audio.play();
+    
     //Declaro un array "save" y le guardo los datos necesarios para poder continuar jugando en otro momento
     let save = {};
 
@@ -628,6 +648,10 @@ function ordenalTablaPuntaje() {
 
 
 function mostrarMensajeError() {
+
+    const audio = new Audio();
+    audio.src = "../sounds/error.wav"
+    audio.play();
 
     let mensaje = document.getElementById('mensaje');
     //muestro mensaje

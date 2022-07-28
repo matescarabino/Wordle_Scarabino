@@ -67,11 +67,11 @@ function obtenerSaves(nombre) {
 
     //Muestro la lista de saves para el nombre ingresado
     let body = `<button onclick="redirigir();" id="nuevaPartida">Nueva Partida</button>`;
-    let c = 0
+    let partida = 0
     for (var i = 0; i < savesArray.length; i++) {
         if(savesArray[i].nombre == nombre){
-            c++;
-            body += `<button onclick="clickSave('${i}');">Partida: ${c}<br><br>${savesArray[i].fecha}</button>`;
+            partida++;
+            body += `<button onclick="clickSave('${i}');">Partida: ${partida}<br><br>${savesArray[i].fecha}</button>`;
             var encontro = true;
         }
     }
