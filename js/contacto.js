@@ -2,7 +2,6 @@ window.onload = function () {
     //Llamo a la función  que realiza las validaciones onFocus/onBlur
     validacionesOnFocus();
 
-
     //Validación on Submit --------------------------------------------------------------------
     document.formulario.onsubmit = function (event) {
 
@@ -46,7 +45,6 @@ window.onload = function () {
     }
 }
 
-
 function validacionesOnFocus() {
     //Validación Nombre --------------------------------------------------------------------
     let nombre = document.getElementById('nombreInput');
@@ -84,33 +82,29 @@ function validacionesOnFocus() {
         }
     };
 
-        //Validación mensaje --------------------------------------------------------------------
-        let mensaje = document.getElementById('mensajeInput');
-    
-        mensaje.onblur = function () {
-            if ((mensaje.value.length < 5) || (mensaje.value == ""))
-             {
-                mensaje.classList.add('invalid');
-                errorMensaje.innerHTML = 'Ingrese un mensaje no menor a 5 caracteres.'
-    
-            }
-        };
-        mensaje.onfocus = function () {
-            if (mensaje.classList.contains('invalid')) {
-                mensaje.classList.remove('invalid');
-                errorMensaje.innerHTML = "&nbsp;";
-            }
-        };
+    //Validación mensaje --------------------------------------------------------------------
+    let mensaje = document.getElementById('mensajeInput');
+
+    mensaje.onblur = function () {
+        if ((mensaje.value.length < 5) || (mensaje.value == "")) {
+            mensaje.classList.add('invalid');
+            errorMensaje.innerHTML = 'Ingrese un mensaje no menor a 5 caracteres.'
+
+        }
+    };
+    mensaje.onfocus = function () {
+        if (mensaje.classList.contains('invalid')) {
+            mensaje.classList.remove('invalid');
+            errorMensaje.innerHTML = "&nbsp;";
+        }
+    };
 }
-
-
 
 function redirigir(){
     window.location.href = "../index.html";
 }
 
-/*------------------------ mostrar puntajes ------------------------------------------*/
-
+/*------------------------ mostrar modal puntajes ------------------------------------------*/
 function obtenerPuntajes() {
 
     //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
@@ -127,7 +121,6 @@ function obtenerPuntajes() {
         }
     document.getElementById('puntajes').innerHTML = body;
 }
-
 
 function mostrarModal() {
     // Ejecuto modal -----------------------------------------------------------

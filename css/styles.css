@@ -1,95 +1,99 @@
-
-body{
-    font-family:'Trebuchet MS';
-    background-color:#121213;
+body {
+    font-family: 'Trebuchet MS';
+    background-color: #121213;
     color: #fff;
 
 }
-section{
-    display:flex;
+
+section {
+    display: flex;
     align-items: center;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-.card{
+.card {
     width: 410px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .card__campo {
+    width: 90%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 90%;
 }
+
 .card__campo_big {
+    width: 90%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 90%;
 }
 
 .card__campo_big textarea {
     height: 80px;
 }
+
 .card__title {
+    width: 80%;
     display: flex;
     justify-content: center;
-    width: 80%;
     font-size: 20px;
     margin: 20px 10% 10px 10%;
     font-weight: bold;
     text-transform: uppercase;
     padding: 5px;
 }
-/*--------------header-------------------*/
 
-header{
+/*--------------header-------------------*/
+header {
     text-align: center;
     justify-content: space-around;
-    display:flex;
+    display: flex;
     flex-direction: row;
     border-bottom: 2px solid #3a3a3c;
 }
 
-h1{
+h1 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 35px;
 }
-.img_holder{
+
+.img_holder {
     width: 40px;
     height: 40px;
-    display:flex;
+    display: flex;
     text-align: center;
-    align-self: center;   
-    justify-self:center ; 
+    align-self: center;
+    justify-self: center;
     justify-content: space-around;
     border-radius: 30px;
     background-color: #fff;
-    border:2px solid #fff;
+    border: 2px solid #fff;
 }
-.img_holder:hover{
+
+.img_holder:hover {
     background-color: #cccccc;
-    border:2px solid #121213;
+    border: 2px solid #121213;
 }
-img{
+
+img {
     width: 30px;
     height: 30px;
     text-align: center;
-    align-self: center;    
+    align-self: center;
 }
 
-a{
-    color:#fff;
+a {
+    color: #fff;
     text-decoration: none;
 }
 
 /*--------------boton-------------------*/
-
 .card__button button {
     width: 250px;
     padding: 1.3em 3em;
@@ -118,19 +122,20 @@ a{
     background-color: #3a3a3c;
     border: 3px solid #121213;
 }
+
 .card__button button:active {
     background-color: #fff;
     border: 3px solid #121213;
 }
-/*--------------footer-------------------*/
 
+/*--------------footer-------------------*/
 footer {
     width: 100%;
     display: flex;
     text-align: center;
     flex-direction: column;
     padding: 20px 0px 20px 0px;
-    border-top:2px solid #3a3a3c ;
+    border-top: 2px solid #3a3a3c;
 }
 
 footer a {
@@ -140,12 +145,12 @@ footer a {
 
 /*================== Modal ==================*/
 .modal {
+    width: 100%;
     display: none;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
@@ -175,8 +180,8 @@ footer a {
     font-size: 18px;
 }
 
-.modal_message .img_holder{
-    margin:28px;
+.modal_message .img_holder {
+    margin: 28px;
 }
 
 .modal_close {
@@ -203,19 +208,20 @@ footer a {
     background-color: #ff3333;
     border: 1px solid #121213;
 }
+
 .modal_close:active {
     background-color: #ff3333;
 }
 
 /*----------- Tabla -------------------*/
 table {
-    display:table;
-	border: 1px solid #ccc;
-	width: 100%;
-	padding: 0;
-	border-collapse: collapse;
-	border-spacing: 0;
-	border: 1px solid #ccc;
+    width: 100%;
+    display: table;
+    border: 1px solid #ccc;
+    padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ccc;
 }
 
 table tr {
@@ -223,14 +229,15 @@ table tr {
 }
 
 table tr:nth-child(even) {
-	background-color: #262626;
+    background-color: #262626;
 }
 
-table td, table th {
-	padding: 10px;
+table td,
+table th {
+    padding: 10px;
     text-align: center;
     justify-content: center;
-    color:#e6e6e6;
+    color: #e6e6e6;
 }
 
 table th {
@@ -255,49 +262,9 @@ table th {
 }
 
 #table-wrapper table thead th .text {
+    width: 35%;
     position: absolute;
     top: -20px;
     z-index: 2;
     height: 20px;
-    width: 35%;
 }
-/*================== tablet / PC ==================*/
-@media (min-width: 520px) {
-    
-    /* .card{
-        width: 520px;
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-    }
-	table {
-		border:0;
-	}
-
-	table tr {
-		margin-bottom: 5px;
-		display: block;
-        border: 1px solid #ccc;
-	}
-
-	table td {
-		display: block;
-		text-align: right;
-		font-size: 16px;
-	}
-
-	table td:last-child {
-		border-bottom: 0;
-	}
-
-	table td:before {
-		content: attr(data-label);
-		float: left;
-		text-transform: uppercase;
-		font-weight: 600;
-	}
-
-	table thead {
-		display: none;
-	}*/
-} 

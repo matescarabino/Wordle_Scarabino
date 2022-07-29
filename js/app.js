@@ -2,8 +2,6 @@ window.onload = () => {
     declararVaribles();
 
     obtenerPuntajes();
-
-
 }
 
 const declararVaribles = async() => {
@@ -77,28 +75,56 @@ const declararVaribles = async() => {
         window.nombre = localStorage.getItem('nombre');
 
         cargarJuego();
-
     }
-
+    //Eliminar esta linea luego de rendir final
     console.log(palabra)
 }
 
+/*------------------------ cargarPalabra y listaPalabras ------------------------------------------*/
+
+const cargarPalabraJugadora = async() => {
+    let url = '../Storage/palabrasJugadoras.json';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    return data;
+}
+
+const elegirPalabra = () => {
+    //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
+    let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
+    let idActual = 0;
+
+    do{
+        idActual = Math.floor(Math.random() * palabras.length);
+    }while(idActual == idAnterior);
+
+    localStorage.setItem("idPalabraAnterior", idActual)
+
+    palabraAleatoria = (palabras[idActual]).toUpperCase()
+
+    palabra = palabraAleatoria.split('')
+
+}
+
+const obtenerListaPalabras = async() => {
+    let url = '../Storage/listaPalabras.json';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    return data;
+}
 
 /*------------------------ cargar juego ------------------------------------------*/
-
 function cargarJuego(){
 
+    for (var index = 0; index < principal.length; index++) {
 
-    for (var index = 0; index < window.principal.length; index++) {
-
-        for (var celda = 0; celda < window.principal[index].length; celda++) {
+        for (var celda = 0; celda < principal[index].length; celda++) {
 
             let valor = document.getElementById(`${index}${celda}`)
 
-            valor.innerHTML = window.principal[index][celda];
+            valor.innerHTML = principal[index][celda];
         }
     }
-
 
     pintarTablero();
 
@@ -107,194 +133,14 @@ function cargarJuego(){
     start();
 }
 
-/*------------------------ funciones del teclado ------------------------------------------*/
-
-function clickTecla(tecla){
-    const audio = new Audio();
-    audio.src = "../sounds/click.mp3"
-    audio.play();
-
-    if(columna < 5){
-        principal[fila][columna] = tecla;
-        valor = document.getElementById(`${fila}${columna}`);
-        valor.innerHTML = tecla;
-        columna++;
-
-        if (columna == 5){
-            let enter = document.getElementById('ENTER');
-            enter.style.backgroundColor = '#33cc33';
-        }
-        if (columna != 0){
-            let del = document.getElementById('<<');
-            del.style.backgroundColor = '#ff3333';
-        }
-    }
-
-}
-
-function del(){
-    const audio = new Audio();
-    audio.src = "../sounds/click.mp3"
-    audio.play();
-
-    if(columna == 0){
-        principal[fila][columna] = '';
-        valor = document.getElementById(`${fila}${columna}`);
-        valor.innerHTML = ''
-    }else if(columna > 0){
-        columna--;
-        principal[fila][columna] = '';
-        valor = document.getElementById(`${fila}${columna}`);
-        valor.innerHTML = ''
-
-        if (columna != 5){
-            let enter = document.getElementById('ENTER');
-            enter.style.backgroundColor = '#70db70';
-        }
-        if (columna == 0){
-            let del = document.getElementById('<<');
-            del.style.backgroundColor = '#ff6666';
-        }
-    }
-}
-
-function enter(){
-
-    if(columna == 5 && fila != 5){
-        if(chequeo()==true){
-            fila++;
-            columna = 0;
-        }else{
-            mostrarMensajeError();
-        }
-    }else if (columna == 5 && fila == 5){
-        if(chequeo()!=true){
-            mostrarMensajeError();
-        }
-    }
-    if (columna != 5){
-        let enter = document.getElementById('ENTER');
-        enter.style.backgroundColor = '#70db70';
-
-        let del = document.getElementById('<<');
-        del.style.backgroundColor = '#ff6666';
-    }
-}
-
-/*----------------------------funciones juego--------------------------------------*/
-
-function chequeo(){
-
-    if(validarSiExiste()){
-
-        validarCoincidencia();
-
-        pintarTablero();
-    
-        validarVictoria();
-        return true
-    }else{
-        return false
-    }
-}
-
-function validarSiExiste() {
-
-    let palabraUsuario = window.principal[window.fila].join("").toLowerCase();
-
-    if(listaPalabras.includes(palabraUsuario)){
-        return true
-    }else{
-        return false
-    }
-}
-function validarCoincidencia() {
-
-    ////////////////////////// Array auxiliar para contar la cantidad de letras
-    let arrayAux = [
-        ['', '', '', '', ''],
-        [0, 0, 0, 0, 0]
-    ];
-    
-    for (let index = 0; index < 5; index++) {
-
-        if (!((arrayAux[0]).includes(palabra[index]))) {
-
-            arrayAux[0][index] = palabra[index]
-        }
-    }
-
-    for (let index = 0; index < 5; index++) {
-
-        for (let index2 = 0; index2 < 5; index2++) {
-
-            if(arrayAux[0][index] == palabra[index2]){
-
-                arrayAux[1][index] ++
-
-            }
-                
-        }
-
-    }
-
-    ////////////////////////// VERDE
-    for (let index = 0; index < 5; index++) {
-
-        if (principal[fila][index] == palabra[index]) {
-
-            colores[fila][index] = 1;
-
-            for (let index2 = 0; index2 < 5; index2++) {
-
-
-                if (principal[fila][index] == arrayAux[0][index2]) {
-
-                    let valor = arrayAux[1][index2]
-
-                    if (valor > 0) {
-                        arrayAux[1][index2]--
-                    }
-                }
-
-            }
-
-        } else {
-            colores[fila][index] = 3;
-        }
-
-    }
-
-    ////////////////////////// AMARILLO
-    for (let index = 0; index < 5; index++) {
-
-        for (let index2 = 0; index2 < 5; index2++) {
-
-            if (principal[fila][index] == arrayAux[0][index2] && (principal[fila][index] != palabra[index])) {
-
-                let valor = arrayAux[1][index2]
-
-                if (valor > 0) {
-                    colores[fila][index] = 2;
-
-                    arrayAux[1][index2]--
-                }
-            }
-        }
-
-    }
-   
-    pintarTeclado();
-}
-
 function pintarTablero(){
-    for (var index = 0; index < window.colores.length; index++) {
+    for (var index = 0; index < colores.length; index++) {
 
-        for (var celda = 0; celda < window.colores[index].length; celda++) {
+        for (var celda = 0; celda < colores[index].length; celda++) {
 
             let valor = document.getElementById(`${index}${celda}`)
                 
-                switch (window.colores[index][celda]) {
+                switch (colores[index][celda]) {
 
                     case 1:
                         valor.classList.add('girar');
@@ -322,13 +168,13 @@ function pintarTablero(){
 }
 
 function pintarTeclado() {
-    for (var index = 0; index < window.colores.length; index++) {
+    for (var index = 0; index < colores.length; index++) {
 
-        for (var celda = 0; celda < window.colores[index].length; celda++) {
+        for (var celda = 0; celda < colores[index].length; celda++) {
 
             let tecla = document.getElementById(principal[index][celda]);
 
-            switch (window.colores[index][celda]) {
+            switch (colores[index][celda]) {
 
                 case 1:
                     tecla.style.backgroundColor = '#33cc33'
@@ -351,9 +197,191 @@ function pintarTeclado() {
                 default:
                     break;
             }
-
         }
     }
+}
+/*------------------------ funciones del teclado ------------------------------------------*/
+
+function clickTecla(tecla){
+    //Sonido click
+    const audio = new Audio();
+    audio.src = "../sounds/click.mp3"
+    audio.play();
+
+    if(columna < 5){
+        principal[fila][columna] = tecla;
+        valor = document.getElementById(`${fila}${columna}`);
+        valor.innerHTML = tecla;
+        columna++;
+
+        if (columna == 5){
+            let enter = document.getElementById('ENTER');
+            enter.style.backgroundColor = '#33cc33';
+        }
+        if (columna != 0){
+            let del = document.getElementById('<<');
+            del.style.backgroundColor = '#ff3333';
+        }
+    }
+
+}
+
+function del(){
+    //Sonido click
+    const audio = new Audio();
+    audio.src = "../sounds/click.mp3"
+    audio.play();
+
+    if(columna == 0){
+        principal[fila][columna] = '';
+        valor = document.getElementById(`${fila}${columna}`);
+        valor.innerHTML = ''
+    }else if(columna > 0){
+        columna--;
+        principal[fila][columna] = '';
+        valor = document.getElementById(`${fila}${columna}`);
+        valor.innerHTML = ''
+
+        //Pintar colores teclas
+        if (columna != 5){
+            let enter = document.getElementById('ENTER');
+            enter.style.backgroundColor = '#70db70';
+        }
+        if (columna == 0){
+            let del = document.getElementById('<<');
+            del.style.backgroundColor = '#ff6666';
+        }
+    }
+}
+
+function enter(){
+
+    if(columna == 5 && fila != 5){
+        if(chequeo()==true){
+            fila++;
+            columna = 0;
+        }else{
+            mostrarMensajeError();
+        }
+    }else if (columna == 5 && fila == 5){
+        if(chequeo()!=true){
+            mostrarMensajeError();
+        }
+    }
+    //Pintar colores teclas
+    if (columna != 5){
+        let enter = document.getElementById('ENTER');
+        enter.style.backgroundColor = '#70db70';
+
+        let del = document.getElementById('<<');
+        del.style.backgroundColor = '#ff6666';
+    }
+}
+
+/*----------------------------funciones juego--------------------------------------*/
+function chequeo(){
+
+    if(validarSiExiste()){
+
+        validarCoincidencia();
+
+        pintarTablero();
+    
+        validarVictoria();
+        return true
+    }else{
+        return false
+    }
+}
+
+function validarSiExiste() {
+
+    let palabraUsuario = principal[fila].join("").toLowerCase();
+
+    if(listaPalabras.includes(palabraUsuario)){
+        return true
+    }else{
+        return false
+    }
+}
+
+function validarCoincidencia() {
+
+    // Array auxiliar para contar la cantidad de letras
+    let arrayAux = [
+        ['', '', '', '', ''],
+        [0, 0, 0, 0, 0]
+    ];
+
+    for (let index = 0; index < 5; index++) {
+
+        if (!((arrayAux[0]).includes(palabra[index]))) {
+
+            arrayAux[0][index] = palabra[index]
+        }
+    }
+
+    for (let index = 0; index < 5; index++) {
+
+        for (let index2 = 0; index2 < 5; index2++) {
+
+            if(arrayAux[0][index] == palabra[index2]){
+
+                arrayAux[1][index] ++
+
+            }
+                
+        }
+
+    }
+    // console.log(arrayAux)
+
+    //VERDE
+    for (let index = 0; index < 5; index++) {
+
+        if (principal[fila][index] == palabra[index]) {
+
+            colores[fila][index] = 1;
+
+            for (let index2 = 0; index2 < 5; index2++) {
+
+                if (principal[fila][index] == arrayAux[0][index2]) {
+
+                    let valor = arrayAux[1][index2]
+
+                    if (valor > 0) {
+                        arrayAux[1][index2]--
+                    }
+                }
+
+            }
+        //NEGRO
+        } else {
+            colores[fila][index] = 3;
+        }
+
+    }
+
+    //AMARILLO
+    for (let index = 0; index < 5; index++) {
+
+        for (let index2 = 0; index2 < 5; index2++) {
+
+            if (principal[fila][index] == arrayAux[0][index2] && (principal[fila][index] != palabra[index])) {
+
+                let valor = arrayAux[1][index2]
+
+                if (valor > 0) {
+                    colores[fila][index] = 2;
+
+                    arrayAux[1][index2]--
+                }
+            }
+        }
+
+    }
+   
+    pintarTeclado();
 }
 
 function validarVictoria(){
@@ -364,27 +392,29 @@ function validarVictoria(){
         colores[fila][3] == 1 &&
         colores[fila][4] == 1)
         {
+            //Sonido victoria
             const audio = new Audio();
             audio.src = "../sounds/victory.wav"
             audio.play();
 
-            let mensaje = document.getElementById('mensaje');
-            mensaje.innerHTML = 'Victoria';
-
             let teclado = document.getElementById('teclado');
             teclado.style.display = 'none';
-
-            let boton1 = document.getElementById('boton1');
-            boton1.style.display = 'flex';
 
             let enter = document.getElementById('ENTER');
             enter.style.display = 'none';
 
-            guardarVictoria();
+            let mensaje = document.getElementById('mensaje');
+            mensaje.innerHTML = 'Victoria';
+
+            let boton1 = document.getElementById('boton1');
+            boton1.style.display = 'flex';
 
             stopTimer();
+
+            guardarVictoria();
     //valido derrota
     }else if(fila == 5){
+        //Sonido derrota
         const audio = new Audio();
         audio.src = "../sounds/defeat.wav"
         audio.play();
@@ -406,10 +436,30 @@ function validarVictoria(){
 
         stopTimer();
     }else{
+        //Sonido flip celdas
         const audio = new Audio();
         audio.src = "../sounds/flip.mp3"
         audio.play();
     }
+}
+
+function mostrarMensajeError() {
+    //Sonido error
+    const audio = new Audio();
+    audio.src = "../sounds/error.wav"
+    audio.play();
+
+    let mensaje = document.getElementById('mensaje');
+    //muestro mensaje
+    mensaje.innerHTML = 'Esa palabra no esta en nuestro diccionario'
+    mensaje.style.color = 'red';
+    mensaje.style.fontSize = '18px';    
+    //lo borro luego de 2 segundos
+    setTimeout(function () {
+        mensaje.innerHTML = '';
+        mensaje.style.color = 'green';
+        mensaje.style.fontSize = '60px';
+    }, 2000);
 }
 
 //boton para volver a jugar
@@ -417,6 +467,7 @@ function reset(){
     window.location.href = "./wordle.html";
 }
 
+//boton para formulario contacto
 function redirigirContacto(){
     window.location.href = "../html/contacto.html";
 }
@@ -426,7 +477,7 @@ function guardarVictoria(){
     let puntaje = {};
 
     puntaje.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
-    puntaje.nombre = window.nombre;
+    puntaje.nombre = nombre;
 
     //calcular puntaje
     switch (fila) {
@@ -476,7 +527,6 @@ function guardarVictoria(){
 }
 
 /*------------------------ timer ------------------------------------------*/
-
 function start() {
     clearInterval(window.Interval);
     window.Interval = setInterval(startTimer, 1000);
@@ -512,7 +562,6 @@ function stopTimer() {
 }
 
 /*------------------------ guardarPartida ------------------------------------------*/
-
 function saveProgress(){
     const audio = new Audio();
     audio.src = "../sounds/click.mp3"
@@ -522,15 +571,15 @@ function saveProgress(){
     let save = {};
 
     save.fecha = new Date().toLocaleString('en-GB', { timeZone:'America/Argentina/Buenos_Aires'});
-    save.nombre = window.nombre;
-    save.palabra = window.palabra;
-    save.principal = window.principal;
-    save.colores = window.colores;
-    save.fila = window.fila;
-    save.columna = window.columna;
-    save.hours = window.hours;
-    save.minutes = window.minutes;
-    save.seconds = window.seconds;
+    save.nombre = nombre;
+    save.palabra = palabra;
+    save.principal = principal;
+    save.colores = colores;
+    save.fila = fila;
+    save.columna = columna;
+    save.hours = hours;
+    save.minutes = minutes;
+    save.seconds = seconds;
 
     //Traigo del localStorage el array "saves", si no esta le asigno "[]"
     let savesArray = JSON.parse(localStorage.getItem('saves')) || [];
@@ -543,40 +592,7 @@ function saveProgress(){
     window.location.href = "../index.html";
 }
 
-/*------------------------ cargarPalabras ------------------------------------------*/
-
-const cargarPalabraJugadora = async() => {
-    let url = '../Storage/palabrasJugadoras.json';
-    const resp = await fetch(url);
-    const data = await resp.json();
-    return data;
-}
-
-const elegirPalabra = () => {
-    //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
-    let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
-    let idActual = 0;
-
-    do{
-        idActual = Math.floor(Math.random() * palabras.length);
-    }while(idActual == idAnterior);
-
-    localStorage.setItem("idPalabraAnterior", idActual)
-
-    window.palabraAleatoria = (palabras[idActual]).toUpperCase()
-
-    window.palabra = palabraAleatoria.split('')
-
-}
-
-const obtenerListaPalabras = async() => {
-    let url = '../Storage/listaPalabras.json';
-    const resp = await fetch(url);
-    const data = await resp.json();
-    return data;
-}
-/*------------------------ mostrar puntajes ------------------------------------------*/
-
+/*------------------------ mostrar modal puntajes ------------------------------------------*/
 function obtenerPuntajes() {
 
     //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
@@ -593,7 +609,6 @@ function obtenerPuntajes() {
         }
     document.getElementById('puntajes').innerHTML = body;
 }
-
 
 function mostrarModal() {
     // Ejecuto modal -----------------------------------------------------------
@@ -647,21 +662,3 @@ function ordenalTablaPuntaje() {
 }
 
 
-function mostrarMensajeError() {
-
-    const audio = new Audio();
-    audio.src = "../sounds/error.wav"
-    audio.play();
-
-    let mensaje = document.getElementById('mensaje');
-    //muestro mensaje
-    mensaje.innerHTML = 'Esa palabra no esta en nuestro diccionario'
-    mensaje.style.color = 'red';
-    mensaje.style.fontSize = '18px';    
-    //lo borro luego de 2 segundos
-    setTimeout(function () {
-        mensaje.innerHTML = '';
-        mensaje.style.color = 'green';
-        mensaje.style.fontSize = '60px';
-    }, 2000);
-}

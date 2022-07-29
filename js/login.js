@@ -16,7 +16,6 @@ window.onload = function () {
             return false; //se utiliza para abortar la funcion
         }
 
-
         localStorage.setItem('nombre', nombre.value);
 
         obtenerSaves(nombre.value);
@@ -49,19 +48,8 @@ function validacionesOnFocus() {
 
 }
 
-function redirigir(){
-    window.location.href = "./html/wordle.html";
-}
-function mail(){
-    window.location.href = "./html/contacto.html";
-}
 /*------------------------ Mostrar partidas ------------------------------------------*/
-
 function obtenerSaves(nombre) {
-
-    // let card_save = document.getElementById('data');
-    // card_save.style.display = "flex"
-
     //Traigo del localStorage el array "saves", si no esta le asigno "[]"
     let savesArray = JSON.parse(localStorage.getItem('saves')) || [];
 
@@ -90,21 +78,28 @@ function obtenerSaves(nombre) {
     }
 }
 
+function redirigir(){
+    window.location.href = "./html/wordle.html";
+}
+
 function clickSave(save) {
 
     let saveActual = new URLSearchParams();
 
     saveActual.append("save", save);
 
+    // //para local
     // window.location.href = "/html/wordle.html?" + saveActual.toString();
 
     // //para github
     window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
-
 }
 
-/*------------------------ mostrar puntajes ------------------------------------------*/
+function mail(){
+    window.location.href = "./html/contacto.html";
+}
 
+/*------------------------ mostrar modal puntajes ------------------------------------------*/
 function obtenerPuntajes() {
 
     //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
@@ -121,7 +116,6 @@ function obtenerPuntajes() {
         }
     document.getElementById('puntajes').innerHTML = body;
 }
-
 
 function mostrarModal() {
     // Ejecuto modal -----------------------------------------------------------
@@ -173,3 +167,4 @@ function ordenalTablaPuntaje() {
         }
     document.getElementById('puntajes').innerHTML = body;
 }
+
