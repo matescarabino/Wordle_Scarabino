@@ -12,7 +12,7 @@ Profesor: Frare Esteban
 
 ## Comenzando 🚀
 
-Ver pagina funcionando: [click aqui](https://github.com/matescarabino/Wordle_Scarabino)
+Ver pagina funcionando: [click aqui](https://matescarabino.github.io/Wordle_Scarabino/index.html)
 
 ### Pre-requisitos 📋
 
