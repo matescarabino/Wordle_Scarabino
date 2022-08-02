@@ -4,7 +4,7 @@ window.onload = () => {
     obtenerPuntajes();
 }
 
-const declararVaribles = async() => {
+async function declararVaribles(){
 
     let saveActual = new URLSearchParams(window.location.search);
 
@@ -81,15 +81,14 @@ const declararVaribles = async() => {
 }
 
 /*------------------------ cargarPalabra y listaPalabras ------------------------------------------*/
-
-const cargarPalabraJugadora = async() => {
+async function cargarPalabraJugadora(){
     let url = '../Storage/palabrasJugadoras.json';
     const resp = await fetch(url);
     const data = await resp.json();
     return data;
 }
 
-const elegirPalabra = () => {
+function elegirPalabra(){
     //me aseguro que la palabra nunca sea la misma 2 veces seguidas guardado en localStorage la anterior
     let idAnterior = JSON.parse(localStorage.getItem('idPalabraAnterior')) || 0;
     let idActual = 0;
@@ -106,7 +105,7 @@ const elegirPalabra = () => {
 
 }
 
-const obtenerListaPalabras = async() => {
+async function obtenerListaPalabras(){
     let url = '../Storage/listaPalabras.json';
     const resp = await fetch(url);
     const data = await resp.json();

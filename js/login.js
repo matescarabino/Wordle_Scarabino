@@ -95,7 +95,7 @@ function clickSave(save) {
     window.location.href = "/Wordle_Scarabino/html/wordle.html?" + saveActual.toString();
 }
 
-function mail(){
+function redirigirContacto(){
     window.location.href = "./html/contacto.html";
 }
 
